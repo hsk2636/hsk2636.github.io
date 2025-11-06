@@ -1,6 +1,6 @@
 ---
 layout: home
-title: "한수 권 포트폴리오"
+title: "권한수의 포트폴리오"
 
 header:
   overlay_color: "#000"
