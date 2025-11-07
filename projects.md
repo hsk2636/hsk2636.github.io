@@ -1,43 +1,40 @@
 ---
-title: "Projects"
-permalink: /projects/
 layout: single
+title: "SQL 학습 및 실습 프로젝트"
+permalink: /projects/
+toc: true
 ---
 
-# 🧩 SQL 기반 데이터 프로젝트
+# 🧩 SQL 학습 및 실습 로드맵
 
-현재는 SQL 및 PL/SQL 학습 단계에 있으며,  
-실습 중심의 프로젝트를 순차적으로 진행 중입니다.  
+SQL 개발자로 성장하기 위해 진행 중이거나 예정인 실습들을 정리합니다.
 
----
+## 1. 기본 SQL 문법 실습
 
-## 📘 1. SQL 기본 문법 실습
-- **내용:** SELECT, JOIN, GROUP BY 중심의 데이터 조회 및 집계 실습  
-- **성과:** 데이터 구조 이해 및 조인(Join) 최적화 경험  
-- **도구:** Oracle SQL Developer, SQLite
+- SELECT, WHERE, ORDER BY, GROUP BY
+- 단일 테이블 조회, 기본 집계 함수
+- 목표: 안정적인 기본기 확보
 
----
+## 2. 조인(Join) & 서브쿼리 심화
 
-## ⚙️ 2. PL/SQL 프로시저 실습
-- **내용:** Procedure, Trigger, Exception Handling 구현  
-- **성과:** 업무 로직 자동화 및 예외 처리 구조 이해  
-- **도구:** Oracle SQL Developer
+- INNER / LEFT / RIGHT / FULL OUTER JOIN
+- 서브쿼리, IN / EXISTS 활용
+- 목표: 다중 테이블 기반 조회 로직 설계 능력
 
----
+## 3. PL/SQL 프로그래밍
 
-## 📊 3. SQL 성능 튜닝 분석
-- **내용:** EXPLAIN PLAN, AUTOTRACE를 통한 쿼리 성능 비교  
-- **성과:** 인덱스 적용 전후 성능 차이 분석 및 개선  
-- **도구:** Oracle SQL Developer
+- Stored Procedure, Function
+- Trigger, Exception Handling
+- 목표: 업무 로직을 DB 레벨에서 구현하는 경험
 
----
+## 4. 성능 튜닝 & 실행 계획 분석
 
-## 🔍 4. ERP 데이터 분석 프로젝트 (예정)
-- **내용:** 생산/판매 데이터를 활용한 KPI 및 불량률 분석  
-- **성과:** 실제 ERP 데이터 흐름을 기반으로 한 실무형 분석  
-- **도구:** Oracle SQL, Excel, Python (Pandas)
+- EXPLAIN PLAN, AUTOTRACE 실습
+- 인덱스 적용 전/후 성능 비교
+- 목표: 느린 쿼리 원인 분석 및 개선 능력
 
----
+## 5. 미니 프로젝트 (예정)
 
-> 📝 각 프로젝트는 실습 완료 후 코드와 결과를 정리하여 GitHub Pages에 게시될 예정입니다.  
-> 데이터 중심 사고력과 SQL 실무 역량을 체계적으로 보여주는 포트폴리오로 발전시켜 나가겠습니다.
+- 판매/생산 데이터 기반 KPI 분석
+- ERP 데이터 흐름을 가정한 시나리오 설계
+- 결과를 개별 포스트로 공개 예정
