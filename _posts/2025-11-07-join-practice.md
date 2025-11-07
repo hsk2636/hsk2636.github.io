@@ -27,7 +27,7 @@ JOIN departments d
   ON e.dept_id = d.dept_id;
 ```
 
-포인트
+포인트  
 ㆍ조건 누락 시 카티전 곱(Cartesian product) 발생  
 ㆍ별칭(alias) 사용으로 가독성 향상  
 ㆍ가장 기본적이면서도 실무에서 가장 자주 쓰이는 형태  
