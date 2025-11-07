@@ -51,6 +51,7 @@ LEFT JOIN employees e
 | LEFT JOIN  | 왼쪽 테이블(departments) 기준 | 왼쪽 전체 + 매칭되는 오른쪽 | NULL 포함 가능 |
 
 
+
 해석 포인트
 
 ㆍ직원이 없는 부서도 포함해야 할 때 LEFT JOIN 사용  
