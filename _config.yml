@@ -1,23 +1,22 @@
-title: 권한수의 포트폴리오
-description: Oracle SQL · PL/SQL · 성능 튜닝 포트폴리오
-logo: /assets/img/logo.png
-
+title: 권한수의 SQL 개발자 준비 노트
+description: Oracle SQL · PL/SQL · 성능 튜닝을 기록하는 학습형 포트폴리오
 url: https://hsk2636.github.io
-baseurl: ""   # 비워둠 (사용자 페이지)
+baseurl: ""
 
-# ✅ 여기! Minimal Mistakes 원격 테마를 사용
 remote_theme: mmistakes/minimal-mistakes
 
-# ✅ 원격 테마에 필요한 플러그인
 plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
 
-# (선택) 저자 카드
+minimal_mistakes_skin: "air"
+
+locale: ko-KR
+timezone: Asia/Seoul
+
 author:
-  name: "Hansoo Kwon"
-  avatar: /assets/img/profile.jpg
-  bio: "SQL Developer · PL/SQL · Performance Tuning"
+  name: "권한수"
+  bio: "SQL Developer 준비 중 · Oracle SQL / PL/SQL / Performance Tuning"
   links:
     - label: "GitHub"
       icon: "fab fa-github"
