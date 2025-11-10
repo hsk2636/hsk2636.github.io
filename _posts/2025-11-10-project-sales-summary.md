@@ -24,3 +24,6 @@ SELECT TO_CHAR(sales_date, 'YYYY-MM') AS month,
 FROM sales_data
 GROUP BY TO_CHAR(sales_date, 'YYYY-MM')
 ORDER BY month;
+```
+
+---
