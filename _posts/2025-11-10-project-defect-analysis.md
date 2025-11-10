@@ -18,9 +18,12 @@ toc: true
 
 ## 🧩 핵심 SQL 예시
 
-```sql
+``` sql
 SELECT process_name,
        ROUND(SUM(bad_qty) / NULLIF(SUM(total_qty), 0) * 100, 2) AS defect_rate
 FROM production_data
 GROUP BY process_name
 ORDER BY defect_rate DESC;
+```
+
+---
