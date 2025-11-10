@@ -3,15 +3,16 @@ layout: single
 title: "프로젝트 3: ERP 연계 데이터 검증"
 date: 2025-11-10
 categories: [Project, SQL]
-tags: [ERP, 데이터검증, Excel, API]
-excerpt: "ERP 시스템과 SQL 데이터를 비교·검증하여 데이터 일관성 문제를 탐지합니다."
+tags: [ERP, 데이터검증, 재고, SQL]
+excerpt: "ERP 시스템과 내부 DB 데이터를 비교하여 수량/금액 불일치를 탐지하는 데이터 검증 프로젝트."
 toc: true
 ---
 
 ## 🎯 프로젝트 개요
-- 주제: ERP ↔ SQL 데이터 비교 검증  
-- 목표: 수량, 단가, 재고 데이터의 불일치 탐지  
-- 사용 기술: SQL, Excel, ERP API  
+
+- 주제: ERP ↔ 내부 시스템 간 데이터 일관성 검증
+- 목표: 재고 수량, 매출, 발주 데이터 불일치 자동 탐지
+- 사용 기술: Oracle SQL, JOIN, 비교 쿼리, Excel 연동
 
 ---
 
@@ -19,22 +20,10 @@ toc: true
 
 ```sql
 SELECT a.item_code,
-       a.qty AS erp_qty,
-       b.qty AS sql_qty,
-       (a.qty - b.qty) AS diff
+       a.qty  AS erp_qty,
+       b.qty  AS system_qty,
+       (a.qty - b.qty) AS diff_qty
 FROM erp_inventory a
-JOIN mes_inventory b
+JOIN system_inventory b
   ON a.item_code = b.item_code
 WHERE a.qty <> b.qty;
-```
-
-**포인트**  
-- ERP ↔ MES 데이터 불일치 탐색  
-- ERP API 연동 전 로컬 DB 비교  
-- PL/SQL로 자동 검증 프로시저 개발 예정  
-
----
-
-## 📈 향후 개선 계획
-- Excel export 기능 추가  
-- ERP 연동 자동화 테스트 시나리오 구축
