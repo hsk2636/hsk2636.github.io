@@ -43,11 +43,14 @@ SQL 개발자로 성장하기 위해 진행 중이거나 예정인 실습들을 
 
 ## 📊 SQL 기반 프로젝트 계획표
 
+## 📊 SQL 기반 프로젝트 계획표
+
 | 구분 | 프로젝트명 | 주요 기술 | 진행 상태 |
 |------|-------------|------------|-------------|
-| 1 | 생산 불량률 분석 | Oracle SQL / PL/SQL | 진행 중 |
-| 2 | 매출 데이터 요약 자동화 | SQL / Python | 준비 중 |
-| 3 | ERP 연계 데이터 검증 | SQL / Excel / ERP API | 예정 |
+| 1 | [생산 불량률 분석](/sql/2025/11/10/project-defect-analysis.html) | Oracle SQL / PL/SQL | 진행 중 |
+| 2 | [매출 데이터 요약 자동화](/sql/2025/11/10/project-sales-summary.html) | SQL / Python | 준비 중 |
+| 3 | [ERP 연계 데이터 검증](/sql/2025/11/10/project-erp-validation.html) | SQL / Excel / ERP API | 예정 |
+
 
 ---
 
