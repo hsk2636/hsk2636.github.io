@@ -27,3 +27,6 @@ FROM erp_inventory a
 JOIN system_inventory b
   ON a.item_code = b.item_code
 WHERE a.qty <> b.qty;
+```
+
+---
