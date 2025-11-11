@@ -77,9 +77,9 @@ GROUP BY ROLLUP(region, product);
 
 **포인트**
 
-ROLLUP: 상위 그룹의 합계를 자동 계산 (예: 지역별 → 제품별 → 전체)  
-CUBE: 가능한 모든 조합의 집계를 계산  
-GROUPING SETS: 여러 GROUP BY 결과를 하나로 결합  
+- ROLLUP: 상위 그룹의 합계를 자동 계산 (예: 지역별 → 제품별 → 전체)  
+- CUBE: 가능한 모든 조합의 집계를 계산  
+- GROUPING SETS: 여러 GROUP BY 결과를 하나로 결합  
 
 ---
 
