@@ -3,3 +3,72 @@
 
 @import "minimal-mistakes/skins/air";   /* 스킨 색상: air / default / mint 등 */
 @import "minimal-mistakes";
+
+/* --------------------------------------------
+   🌊 Sidebar Modern Blue Style (for 권한수 Portfolio)
+   -------------------------------------------- */
+.sidebar__right {
+  background: #f8fafc;
+  border-left: 2px solid #007acc;
+  padding: 1.2rem 1.4rem;
+  border-radius: 0 12px 12px 0;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.sidebar__right h3 {
+  font-size: 1.05rem;
+  color: #007acc;
+  border-bottom: 2px solid #007acc33;
+  padding-bottom: 0.3rem;
+  margin-top: 1.4rem;
+  font-weight: 600;
+}
+
+.sidebar__right a {
+  color: #005f99;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.sidebar__right a:hover {
+  color: #007acc;
+  text-decoration: underline;
+}
+
+.sidebar__right ul {
+  list-style: none;
+  padding-left: 0.4rem;
+}
+
+.sidebar__right li {
+  margin: 0.2rem 0;
+}
+
+.sidebar__right small {
+  font-size: 0.78rem;
+  color: #555;
+}
+
+.notice--primary {
+  background: #e7f5ff;
+  border: 1px solid #b3e0ff;
+  padding: 0.6rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.tag-cloud a {
+  background: #e8f4ff;
+  color: #007acc;
+  padding: 4px 8px;
+  margin: 2px;
+  border-radius: 6px;
+  display: inline-block;
+  font-size: 0.85rem;
+}
+
+.tag-cloud a:hover {
+  background: #007acc;
+  color: white;
+}
