@@ -21,3 +21,13 @@ author:
     - label: "GitHub"
       icon: "fab fa-github"
       url: "https://github.com/hsk2636"
+
+defaults:
+  - scope:
+      path: ""        # 전체에 적용
+      type: "posts"
+    values:
+      layout: single
+      toc: true
+      sidebar:
+        sticky: true  # 스크롤 고정
