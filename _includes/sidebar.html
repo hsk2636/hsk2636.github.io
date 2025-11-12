@@ -1,0 +1,56 @@
+<!-- _includes/sidebar.html -->
+<!-- Minimal Mistakes 커스텀 사이드바 -->
+<aside class="sidebar__right sticky">
+
+  <!-- 빠른 링크 -->
+  <div class="notice--primary" style="margin-bottom:1rem">
+    <strong>📌 Quick Links</strong><br>
+    <a href="{{ '/' | relative_url }}">Home</a> ·
+    <a href="{{ '/projects/' | relative_url }}">Projects</a> ·
+    <a href="{{ '/categories/#sql' | relative_url }}">SQL Note</a> ·
+    <a href="{{ '/about/' | relative_url }}">About</a>
+  </div>
+
+  <!-- 최근 SQL 노트 -->
+  <div class="panel">
+    <h3>🆕 최근 SQL 노트</h3>
+    <ul class="taxonomy__index">
+      {% assign sql_posts = site.categories.SQL | sort: 'date' | reverse %}
+      {% for p in sql_posts limit:5 %}
+        <li>
+          <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+          <small class="taxonomy__count">{{ p.date | date: "%Y-%m-%d" }}</small>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- 진행 중 프로젝트 -->
+  <div class="panel">
+    <h3>🧱 진행 중 프로젝트</h3>
+    <ul class="taxonomy__index">
+      {% assign prj_posts = site.categories.Project | sort: 'date' | reverse %}
+      {% for p in prj_posts limit:5 %}
+        <li>
+          <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+          {% if p.progress %}
+            <small class="taxonomy__count">progress {{ p.progress }}%</small>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- 인기 태그 (상위 10개) -->
+  <div class="panel">
+    <h3>🏷️ Tags</h3>
+    <div class="tag-cloud">
+      {% assign tags = site.tags | sort %}
+      {% for t in tags limit:10 %}
+        {% assign tag = t[0] %}
+        <a class="post__tag" href="{{ '/tags/#' | append: tag | relative_url }}">#{{ tag }}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+</aside>
