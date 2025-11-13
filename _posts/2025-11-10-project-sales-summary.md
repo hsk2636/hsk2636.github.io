@@ -6,6 +6,10 @@ categories: [Project, SQL]
 tags: [매출, 집계, 자동화, Python, SQL]
 excerpt: "매출 데이터를 SQL로 집계하고, Python과 연계해 리포트를 자동 생성하는 프로젝트."
 toc: true
+
+header:
+  overlay_image: /assets/images/projects/sales-summary-banner.png
+  overlay_filter: 0.3
 ---
 
 ## 🎯 프로젝트 개요
