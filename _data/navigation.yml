@@ -1,9 +1,0 @@
-main:
-  - title: "Home"
-    url: /
-  - title: "Projects"
-    url: /projects/
-  - title: "SQL Note"
-    url: /categories/sql/
-  - title: "About"
-    url: /about/
