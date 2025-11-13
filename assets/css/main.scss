@@ -72,3 +72,15 @@
   background: #007acc;
   color: white;
 }
+
+/* --- Home cards tuning --- */
+.page__content .archive__item-teaser img {
+  border-radius: 12px;
+}
+.page__content .btn--primary {
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+}
+.page__content .archive__item-title {
+  font-weight: 700;
+}
