@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>권한수 | Creative Resume & Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fb;
+            color: #333;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: #fff;
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .header h3 {
+            margin: 0;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .header p {
+            margin-top: 15px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            display: flex;
+            max-width: 1100px;
+            margin: 40px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .left, .right {
+            padding: 25px;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .left {
+            width: 32%;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+        }
+
+        .right {
+            width: 68%;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+        }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            border-left: 5px solid #6366f1;
+            padding-left: 12px;
+        }
+
+        /* ===== PROFILE IMAGE ===== */
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        /* ===== LISTS ===== */
+        .info-box, .skill-box, .item {
+            margin-bottom: 20px;
+        }
+
+        .item-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .item-sub {
+            font-size: 13px;
+            opacity: 0.7;
+            margin-bottom: 6px;
+        }
+
+        /* ===== SKILLS ===== */
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .bar {
+            height: 8px;
+            background: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+        }
+
+        /* ===== PROJECT CARDS ===== */
+        .project-card {
+            padding: 18px;
+            border-radius: 12px;
+            background: #fafafa;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+            transition: 0.2s;
+        }
+
+        .project-card:hover {
+            background: #fff;
+            border-color: #c7d2fe;
+            box-shadow: 0 4px 10px rgba(99,102,241,0.15);
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .project-tech {
+            font-size: 13px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .contact-line b {
+            font-weight: 600;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width: 800px) {
+            .container {
+                flex-direction: column;
+            }
+            .left, .right {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <h1>권한수 (Hansoo Kwon)</h1>
+        <h3>SQL Developer · PL/SQL Engineer · Manufacturing IT</h3>
+        <p>
+            Oracle SQL(PL/SQL), MES/PDA/ERP 프로세스 분석, 데이터 전처리(Data Preprocessing) 기반으로  
+            제조 현장의 생산·품질·출하 데이터를 다루는 데이터 엔지니어형 개발자.
+        </p>
+    </div>
+
+    <!-- ===== CONTENT ===== -->
+    <div class="container">
+
+        <!-- LEFT SIDE -->
+        <div class="left">
+
+            <!-- PROFILE IMAGE -->
+            <img src="img/profile.jpg" alt="프로필" class="profile-pic">
+
+            <!-- CONTACT -->
+            <div>
+                <h2 class="section-title">Contact</h2>
+
+                <div class="contact-line"><b>Email</b> <span>your-email@example.com</span></div>
+                <div class="contact-line"><b>Phone</b> <span>010-0000-0000</span></div>
+                <div class="contact-line"><b>GitHub</b> <span>github.com/hsk2636</span></div>
+                <div class="contact-line"><b>Website</b> <span>hsk2636.github.io</span></div>
+            </div>
+
+            <!-- SKILLS -->
+            <div>
+                <h2 class="section-title">Skills</h2>
+
+                <div class="skill-box">
+                    <div class="skill-name">Oracle SQL / PL-SQL</div>
+                    <div class="bar"><div class="bar-fill" style="width: 85%;"></div></div>
+                </div>
+
+                <div class="skill-box">
+                    <div class="skill-name">MES / PDA / ERP</div>
+                    <div class="bar"><div class="bar-fill" style="width: 80%;"></div></div>
+                </div>
+
+                <div class="skill-box">
+                    <div class="skill-name">C# (WinForms)</div>
+                    <div class="bar"><div class="bar-fill" style="width: 70%;"></div></div>
+                </div>
+
+                <div class="skill-box">
+                    <div class="skill-name">Python (Pandas)</div>
+                    <div class="bar"><div class="bar-fill" style="width: 75%;"></div></div>
+                </div>
+
+                <div class="skill-box">
+                    <div class="skill-name">NiFi (ETL)</div>
+                    <div class="bar"><div class="bar-fill" style="width: 60%;"></div></div>
+                </div>
+            </div>
+
+            <!-- EDUCATION -->
+            <div>
+                <h2 class="section-title">Education</h2>
+
+                <div class="item">
+                    <div class="item-title">Practical Data Preprocessing</div>
+                    <div class="item-sub">2025</div>
+                    <div class="item-sub">
+                        Missing values, Encoding, SMOTE, Pandas 실습
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-title">Oracle SQL / PL-SQL 실무 과정</div>
+                    <div class="item-sub">2024–Present</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right">
+
+            <!-- SUMMARY -->
+            <div>
+                <h2 class="section-title">Profile Summary</h2>
+                <p style="line-height: 1.7;">
+                    제조 IT(MES/PDA/ERP) 기반 환경에서 Oracle SQL 및 PL/SQL을 활용해 생산·출하·품질 데이터를 다루는 개발자.
+                    LOT 상태 흐름(작업시작/완료/인수/재인수), PDA 스캔 로직, ERP 연계 프로시저 등을 직접 분석하며 
+                    공정 흐름 + 데이터 흐름을 함께 이해하는 실무형 엔지니어.
+                </p>
+            </div>
+
+            <!-- EXPERIENCE -->
+            <div>
+                <h2 class="section-title">Experience</h2>
+
+                <div class="item">
+                    <div class="item-title">SQL Developer (Manufacturing IT)</div>
+                    <div class="item-sub">2024–Present</div>
+                    <ul style="padding-left: 18px; line-height: 1.6; font-size: 14px;">
+                        <li>생산지시, LOT 관리, 공정 진행, 출고·입고 프로세스 PL/SQL 분석</li>
+                        <li>PDA 출고/입고/재입고 프로시저 (USP_M20_F01_011_01 등) 로직 해석 및 정리</li>
+                        <li>통합 품질 정보 집계 쿼리(NVL, DECODE, GROUP BY)를 이용한 품질 데이터 집계</li>
+                        <li>C# WinForms 기반 생산/품질 화면 이벤트 처리 → DB 패키지 흐름 문서화</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- PROJECTS -->
+            <div>
+                <h2 class="section-title">Projects</h2>
+
+                <div class="project-card">
+                    <div class="project-title">통합 품질 정보 SQL 분석</div>
+                    <div class="project-tech">Oracle SQL, PL-SQL</div>
+                    <p style="font-size:14px; line-height:1.6;">
+                        LOT별/버전별 GOOD/BAD/M2 데이터와 불량률을 계산하는 집계 쿼리 분석.  
+                        NVL 및 DECODE를 이용한 합계 행 처리 로직 문서화.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-title">PDA 출고/입고/재입고 프로시저 분석</div>
+                    <div class="project-tech">Oracle PL-SQL, PDA(Android)</div>
+                    <p style="font-size:14px; line-height:1.6;">
+                        현장의 PDA 스캔 흐름과 DB 반영 로직을 분석하여  
+                        출고(ETC/MOV/SAL), 재입고, ERP 인터페이스 처리 순서를 문서화.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-title">Data Preprocessing 실습 노트</div>
+                    <div class="project-tech">Python, Pandas, SMOTE</div>
+                    <p style="font-size:14px; line-height:1.6;">
+                        결측치 처리(fillna), Label Encoding/One-Hot,  
+                        SMOTE 기반 불균형 데이터 처리 실습을 노트로 정리.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
