@@ -8,11 +8,18 @@ body {
 }
 
 /* HEADER */
+/* HEADER */
 .header {
     background: linear-gradient(135deg, #6366f1, #ec4899);
     color: #fff;
     padding: 40px 20px 32px;
     text-align: center;
+
+    /* 화면 전체(브라우저 폭) 꽉 채우기 */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    box-sizing: border-box;
 }
 
 .header h1 {
