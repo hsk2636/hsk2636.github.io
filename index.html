@@ -1,315 +1,191 @@
-/* ===== 기본 공통 스타일 (Mobile-first) ===== */
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>권한수 | Creative Resume & Portfolio</title>
 
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: #f5f7fb;
-    color: #333;
-}
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-/* HEADER */
-.header {
-    background: linear-gradient(135deg, #6366f1, #ec4899);
-    color: #fff;
-    padding: 40px 20px 32px;
-    text-align: center;
-}
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
 
-.header h1 {
-    font-size: 26px;
-    margin-bottom: 6px;
-    font-weight: 800;
-}
+<body>
 
-.header h3 {
-    margin: 0;
-    font-weight: 400;
-    opacity: 0.9;
-    font-size: 14px;
-}
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <h1>권한수 (Hansoo Kwon)</h1>
+        <h3>SQL Developer · PL/SQL Engineer · Manufacturing IT</h3>
+        <p>
+            Oracle SQL(PL/SQL), MES/PDA/ERP 프로세스 분석, 데이터 전처리(Data Preprocessing)를 기반으로  
+            제조 현장의 생산·품질·출하 데이터를 다루는 데이터 엔지니어형 개발자.
+        </p>
+    </div>
 
-.header p {
-    margin-top: 14px;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-    font-size: 13px;
-}
+    <!-- ===== CONTENT ===== -->
+    <div class="container">
 
-/* LAYOUT - Mobile 기준: 1열 */
-.container {
-    display: flex;
-    flex-direction: column;
-    max-width: 1100px;
-    margin: 24px auto 32px;
-    gap: 16px;
-    padding: 0 16px 24px;
-}
+        <!-- LEFT SIDE -->
+        <div class="left">
 
-.left, .right {
-    padding: 20px;
-    border-radius: 10px;
-    background: white;
-    box-shadow: 0 5px 12px rgba(0,0,0,0.08);
-    width: 100%;
-}
+            <!-- PROFILE IMAGE -->
+            <img src="img/profile.jpg" alt="프로필 사진" class="profile-pic">
 
-/* SECTION TITLE */
-.section-title {
-    font-size: 17px;
-    margin-bottom: 12px;
-    font-weight: 700;
-    border-left: 5px solid #6366f1;
-    padding-left: 10px;
-}
+            <!-- CONTACT -->
+            <div>
+                <h2 class="section-title">Contact</h2>
 
-/* PROFILE IMAGE */
-.profile-pic {
-    width: 95px;
-    height: 95px;
-    border-radius: 15px;
-    object-fit: cover;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+                <div class="contact-line">
+                    <b>Email</b>
+                    <span class="contact-value">
+                        <a href="mailto:hsk2636@example.com">hsk2636@example.com</a>
+                    </span>
+                </div>
 
-/* LISTS / ITEMS */
-.info-box, .skill-box, .item {
-    margin-bottom: 18px;
-}
+                <div class="contact-line">
+                    <b>Phone</b>
+                    <span class="contact-value">
+                        <a href="tel:01000000000">010-0000-0000</a>
+                    </span>
+                </div>
 
-.item-title {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 3px;
-}
+                <div class="contact-line">
+                    <b>GitHub</b>
+                    <span class="contact-value">
+                        <a href="https://github.com/hsk2636" target="_blank" rel="noopener noreferrer">
+                            github.com/hsk2636
+                        </a>
+                    </span>
+                </div>
 
-.item-sub {
-    font-size: 12px;
-    opacity: 0.7;
-    margin-bottom: 5px;
-}
+                <div class="contact-line">
+                    <b>Website</b>
+                    <span class="contact-value">
+                        <a href="https://hsk2636.github.io" target="_blank" rel="noopener noreferrer">
+                            hsk2636.github.io
+                        </a>
+                    </span>
+                </div>
+            </div>
 
-/* CONTACT */
-.contact-line {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-    margin-bottom: 10px;
-    font-size: 13px;
-}
+            <!-- SKILLS -->
+            <div>
+                <h2 class="section-title">Skills</h2>
 
-.contact-line b {
-    font-weight: 600;
-    font-size: 13px;
-}
+                <div class="skill-box">
+                    <div class="skill-name">Oracle SQL / PL-SQL</div>
+                    <div class="bar"><div class="bar-fill" style="width: 85%;"></div></div>
+                </div>
 
-.contact-value {
-    text-align: left;
-    max-width: 100%;
-    word-break: break-all;
-    font-size: 13px;
-}
+                <div class="skill-box">
+                    <div class="skill-name">MES / PDA / ERP</div>
+                    <div class="bar"><div class="bar-fill" style="width: 80%;"></div></div>
+                </div>
 
-.contact-value a {
-    text-decoration: none;
-    color: #6366f1;
-    font-weight: 500;
-}
+                <div class="skill-box">
+                    <div class="skill-name">C# (WinForms)</div>
+                    <div class="bar"><div class="bar-fill" style="width: 70%;"></div></div>
+                </div>
 
-.contact-value a:hover {
-    text-decoration: underline;
-}
+                <div class="skill-box">
+                    <div class="skill-name">Python (Pandas)</div>
+                    <div class="bar"><div class="bar-fill" style="width: 75%;"></div></div>
+                </div>
 
-/* SKILLS */
-.skill-name {
-    font-weight: 600;
-    margin-bottom: 5px;
-    font-size: 13px;
-}
+                <div class="skill-box">
+                    <div class="skill-name">NiFi (ETL)</div>
+                    <div class="bar"><div class="bar-fill" style="width: 60%;"></div></div>
+                </div>
+            </div>
 
-.bar {
-    height: 8px;
-    background: #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-}
+            <!-- EDUCATION -->
+            <div>
+                <h2 class="section-title">Education</h2>
 
-.bar-fill {
-    height: 100%;
-    background: linear-gradient(135deg, #6366f1, #ec4899);
-}
+                <div class="item">
+                    <div class="item-title">Practical Data Preprocessing</div>
+                    <div class="item-sub">2025</div>
+                    <div class="item-sub">
+                        Missing values, Encoding, SMOTE, Pandas 실습
+                    </div>
+                </div>
 
-/* PROJECT CARDS */
-.project-card {
-    padding: 16px;
-    border-radius: 12px;
-    background: #fafafa;
-    border: 1px solid #e5e7eb;
-    margin-bottom: 16px;
-    transition: 0.2s;
-}
+                <div class="item">
+                    <div class="item-title">Oracle SQL / PL-SQL 실무 과정</div>
+                    <div class="item-sub">2024–Present</div>
+                </div>
+            </div>
 
-.project-card:hover {
-    background: #fff;
-    border-color: #c7d2fe;
-    box-shadow: 0 4px 10px rgba(99,102,241,0.15);
-    transform: translateY(-1px);
-}
+        </div>
 
-.project-title {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
+        <!-- RIGHT SIDE -->
+        <div class="right">
 
-.project-tech {
-    font-size: 12px;
-    opacity: 0.7;
-    margin-bottom: 8px;
-}
+            <!-- SUMMARY -->
+            <div>
+                <h2 class="section-title">Profile Summary</h2>
+                <p class="text-body">
+                    제조 IT(MES/PDA/ERP) 기반 환경에서 Oracle SQL 및 PL/SQL을 활용해 생산·출하·품질 데이터를 다루는 개발자.
+                    LOT 상태 흐름(인수등록/작업시작/작업완료/인계등록), PDA 스캔 로직, ERP 연계 프로시저를 직접 분석하며 
+                    공정 흐름(Process Flow)과 데이터 흐름(Data Flow)을 함께 이해하는 실무형 엔지니어.
+                </p>
+            </div>
 
-/* SUMMARY TEXT */
-.text-body {
-    line-height: 1.6;
-    font-size: 13px;
-}
+            <!-- EXPERIENCE -->
+            <div>
+                <h2 class="section-title">Experience</h2>
 
-/* 기본 ul 스타일 약간 줄이기 */
-.right ul {
-    padding-left: 18px;
-    line-height: 1.55;
-    font-size: 13px;
-}
+                <div class="item">
+                    <div class="item-title">SQL Developer (Manufacturing IT)</div>
+                    <div class="item-sub">2024–Present</div>
+                    <ul style="padding-left: 18px; line-height: 1.6; font-size: 14px;">
+                        <li>생산지시, LOT 관리, 공정 진행, 출고·입고 프로세스 PL/SQL 분석 및 흐름 정리</li>
+                        <li>PDA 자재/출하/입고 프로시저 로직 해석 및 스캔 예외 케이스 정리</li>
+                        <li>통합 품질 정보 집계 쿼리(NVL, DECODE, GROUP BY)를 이용한 품질 데이터 집계 구조 이해</li>
+                        <li>C# WinForms 기반 생산/품질 화면 이벤트 처리 → DB 패키지 호출 흐름 문서화</li>
+                    </ul>
+                </div>
 
-/* ================================
-   1단계: 태블릿 이상 (폭 768px~)
-   ================================ */
-@media (min-width: 768px) {
+            </div>
 
-    .header {
-        padding: 50px 24px 40px;
-    }
+            <!-- PROJECTS -->
+            <div>
+                <h2 class="section-title">Projects</h2>
 
-    .header h1 {
-        font-size: 32px;
-    }
+                <div class="project-card">
+                    <div class="project-title">통합 품질 정보 SQL 분석</div>
+                    <div class="project-tech">Oracle SQL, PL-SQL</div>
+                    <p class="text-body">
+                        LOT별/버전별 GOOD/BAD/M2 데이터와 불량률을 계산하는 집계 쿼리 분석.  
+                        NVL 및 DECODE를 이용해 합계 행(TOTAL ROW)을 표현하는 로직을 정리하고,
+                        품질 지표 계산 흐름을 문서화.
+                    </p>
+                </div>
 
-    .header h3 {
-        font-size: 15px;
-    }
+                <div class="project-card">
+                    <div class="project-title">PDA 출고/입고/재입고 프로시저 분석</div>
+                    <div class="project-tech">Oracle PL-SQL, PDA(Android)</div>
+                    <p class="text-body">
+                        현장의 PDA 스캔 흐름과 DB 반영 로직을 분석하여  
+                        출고 유형(ETC/MOV/SAL) 및 재입고, ERP 인터페이스 처리 순서를 단계별로 문서화.
+                    </p>
+                </div>
 
-    .header p {
-        max-width: 640px;
-        font-size: 14px;
-    }
+                <div class="project-card">
+                    <div class="project-title">Data Preprocessing 실습 노트</div>
+                    <div class="project-tech">Python, Pandas, SMOTE</div>
+                    <p class="text-body">
+                        결측치 처리(fillna), Label Encoding/One-Hot Encoding,  
+                        SMOTE 기반 불균형 데이터 처리 실습을 진행하고, 각 방법의 특징과 주의점을 노트로 정리.
+                    </p>
+                </div>
 
-    .container {
-        flex-direction: row;     /* 2열로 변경 */
-        gap: 20px;
-        padding: 0 20px 32px;
-        margin-top: 32px;
-    }
+            </div>
 
-    .left {
-        flex: 0 0 34%;          /* 왼쪽 34% 고정 */
-    }
+        </div>
+    </div>
 
-    .right {
-        flex: 1;                /* 오른쪽 나머지 */
-    }
-
-    .left, .right {
-        padding: 24px;
-    }
-
-    .section-title {
-        font-size: 18px;
-        margin-bottom: 14px;
-    }
-
-    .profile-pic {
-        width: 110px;
-        height: 110px;
-        margin-bottom: 18px;
-    }
-
-    .contact-line {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .contact-value {
-        text-align: right;
-        max-width: 60%;
-    }
-
-    .item-title {
-        font-size: 16px;
-    }
-
-    .item-sub {
-        font-size: 13px;
-    }
-
-    .text-body {
-        font-size: 14px;
-    }
-
-    .project-title {
-        font-size: 17px;
-    }
-
-    .right ul {
-        font-size: 14px;
-        line-height: 1.6;
-    }
-}
-
-/* =================================
-   2단계: 데스크탑 넓은 화면 (1200px~)
-   ================================= */
-@media (min-width: 1200px) {
-    .header {
-        padding: 60px 30px 45px;
-    }
-
-    .header h1 {
-        font-size: 40px;
-    }
-
-    .header h3 {
-        font-size: 16px;
-    }
-
-    .header p {
-        font-size: 15px;
-        line-height: 1.7;
-    }
-
-    .container {
-        max-width: 1100px;
-        margin-top: 40px;
-        margin-bottom: 40px;
-    }
-
-    .left, .right {
-        padding: 26px;
-    }
-
-    .section-title {
-        font-size: 20px;
-    }
-
-    .project-card {
-        padding: 18px;
-        margin-bottom: 20px;
-    }
-
-    .project-title {
-        font-size: 18px;
-    }
-}
+</body>
+</html>
