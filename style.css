@@ -1,13 +1,17 @@
 /* ===== 기본 공통 스타일 (Mobile-first) ===== */
 
-body {
+/* 브라우저 기본 여백 완전 제거 */
+html, body {
     margin: 0;
+    padding: 0;
+}
+
+body {
     font-family: 'Inter', sans-serif;
     background: #f5f7fb;
     color: #333;
 }
 
-/* HEADER */
 /* HEADER */
 .header {
     background: linear-gradient(135deg, #6366f1, #ec4899);
@@ -15,10 +19,8 @@ body {
     padding: 40px 20px 32px;
     text-align: center;
 
-    /* 화면 전체(브라우저 폭) 꽉 채우기 */
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    /* 화면 폭 기준으로 꽉 차게 */
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -199,11 +201,6 @@ body {
    ================================= */
 @media (max-width: 600px) {
 
-    /* 배경을 흰색으로 해서 양옆 회색 띠 안 보이게 */
-    body {
-        background: #ffffff;
-    }
-
     .header {
         padding: 24px 14px 22px;
     }
@@ -221,20 +218,19 @@ body {
         max-width: 100%;
     }
 
-    /* 👉 모바일에서는 카드가 화면을 거의 꽉 채우도록 */
     .container {
         max-width: 100%;
         width: 100%;
         margin: 8px 0 16px;
-        padding: 0;          /* 좌우 padding 제거 */
+        padding: 0;
         gap: 12px;
     }
 
     .left,
     .right {
-        border-radius: 0;    /* 모서리 둥근거 제거 → 화면 끝까지 붙는 느낌 */
+        border-radius: 0;
         padding: 18px 14px;
-        box-shadow: none;    /* 그림자 제거해서 “카드 박스” 느낌 줄이기 */
+        box-shadow: none;
     }
 
     .profile-pic {
