@@ -1,494 +1,315 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>권한수 | Creative Resume & Portfolio</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --color-primary: #6366f1;
-            --color-secondary: #ec4899;
-            --color-bg: #f5f7fb;
-            --color-card: #ffffff;
-            --color-border-soft: #e5e7eb;
-            --color-text-main: #333333;
-            --radius-card: 12px;
-            --shadow-soft: 0 5px 12px rgba(0,0,0,0.08);
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: var(--color-bg);
-            color: var(--color-text-main);
-        }
-
-        /* ===== HEADER ===== */
-        .header {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-            color: #fff;
-            padding: 60px 30px 50px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 42px;
-            margin-bottom: 8px;
-            font-weight: 800;
-        }
-
-        .header h3 {
-            margin: 0;
-            font-weight: 400;
-            opacity: 0.9;
-        }
-
-        .header p {
-            margin-top: 18px;
-            max-width: 680px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.7;
-            font-size: 15px;
-        }
-
-        /* ===== LAYOUT ===== */
-        .container {
-            display: flex;
-            max-width: 1100px;
-            margin: 40px auto;
-            gap: 20px;
-            padding: 0 20px 40px;
-        }
-
-        .left, .right {
-            padding: 25px;
-            border-radius: var(--radius-card);
-            background: var(--color-card);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .left {
-            width: 32%;
-        }
-
-        .right {
-            width: 68%;
-        }
-
-        /* ===== SECTION TITLE ===== */
-        .section-title {
-            font-size: 20px;
-            margin-bottom: 15px;
-            font-weight: 700;
-            border-left: 5px solid var(--color-primary);
-            padding-left: 12px;
-        }
-
-        /* ===== PROFILE IMAGE ===== */
-        .profile-pic {
-            width: 120px;
-            height: 120px;
-            border-radius: 15px;
-            object-fit: cover;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        /* ===== LISTS / ITEMS ===== */
-        .info-box, .skill-box, .item {
-            margin-bottom: 20px;
-        }
-
-        .item-title {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 3px;
-        }
-
-        .item-sub {
-            font-size: 13px;
-            opacity: 0.7;
-            margin-bottom: 6px;
-        }
-
-        /* ===== CONTACT ===== */
-        .contact-line {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            font-size: 14px;
-            gap: 8px;
-        }
-
-        .contact-line b {
-            font-weight: 600;
-        }
-
-        .contact-value {
-            text-align: right;
-            max-width: 60%;
-            word-break: break-all;
-        }
-
-        .contact-value a {
-            text-decoration: none;
-            color: var(--color-primary);
-            font-weight: 500;
-        }
-
-        .contact-value a:hover {
-            text-decoration: underline;
-        }
-
-        /* ===== SKILLS ===== */
-        .skill-name {
-            font-weight: 600;
-            margin-bottom: 6px;
-            font-size: 14px;
-        }
-
-        .skill-meta {
-            font-size: 12px;
-            opacity: 0.7;
-            margin-bottom: 5px;
-        }
-
-        .bar {
-            height: 8px;
-            background: #ddd;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .bar-fill {
-            height: 100%;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-        }
-
-        /* ===== TAGS ===== */
-        .tag-row {
-            margin-top: 6px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-
-        .tag {
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 999px;
-            border: 1px solid #e5e7eb;
-            background: #f9fafb;
-        }
-
-        /* ===== PROJECT CARDS ===== */
-        .project-card {
-            padding: 18px;
-            border-radius: 12px;
-            background: #fafafa;
-            border: 1px solid var(--color-border-soft);
-            margin-bottom: 20px;
-            transition: 0.2s;
-        }
-
-        .project-card:hover {
-            background: #ffffff;
-            border-color: #c7d2fe;
-            box-shadow: 0 4px 10px rgba(99,102,241,0.15);
-            transform: translateY(-2px);
-        }
-
-        .project-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .project-period {
-            font-size: 12px;
-            opacity: 0.6;
-            margin-bottom: 4px;
-        }
-
-        .project-tech {
-            font-size: 13px;
-            opacity: 0.75;
-            margin-bottom: 10px;
-        }
-
-        .project-role {
-            font-size: 13px;
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-
-        /* ===== SUMMARY / TEXT ===== */
-        .text-body {
-            line-height: 1.7;
-            font-size: 14px;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media(max-width: 800px) {
-            .header {
-                padding: 40px 20px 35px;
-            }
-
-            .header h1 {
-                font-size: 30px;
-            }
-
-            .header h3 {
-                font-size: 14px;
-            }
-
-            .header p {
-                font-size: 14px;
-            }
-
-            .container {
-                flex-direction: column;
-                padding: 0 16px 30px;
-            }
-
-            .left, .right {
-                width: 100%;
-                padding: 20px;
-            }
-
-            .contact-line {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .contact-value {
-                text-align: left;
-                max-width: 100%;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- ===== HEADER ===== -->
-    <div class="header">
-        <h1>권한수 (Hansoo Kwon)</h1>
-        <h3>SQL Developer · PL/SQL Engineer · Manufacturing IT</h3>
-        <p>
-            Oracle SQL(PL/SQL), MES/PDA/ERP 프로세스 분석, 데이터 전처리(Data Preprocessing)를 기반으로  
-            제조 현장의 생산·품질·출하 데이터를 다루는 데이터 엔지니어형 개발자.
-        </p>
-    </div>
-
-    <!-- ===== CONTENT ===== -->
-    <div class="container">
-
-        <!-- LEFT SIDE -->
-        <div class="left">
-
-            <!-- PROFILE IMAGE -->
-            <img src="img/profile.jpg" alt="프로필 사진" class="profile-pic">
-
-            <!-- CONTACT -->
-            <div>
-                <h2 class="section-title">Contact</h2>
-
-                <div class="contact-line">
-                    <b>Email</b>
-                    <span class="contact-value">
-                        <a href="mailto:hsk2636@example.com">hsk2636@example.com</a>
-                    </span>
-                </div>
-
-                <div class="contact-line">
-                    <b>Phone</b>
-                    <span class="contact-value">
-                        <a href="tel:01000000000">010-0000-0000</a>
-                    </span>
-                </div>
-
-                <div class="contact-line">
-                    <b>GitHub</b>
-                    <span class="contact-value">
-                        <a href="https://github.com/hsk2636" target="_blank" rel="noopener noreferrer">
-                            github.com/hsk2636
-                        </a>
-                    </span>
-                </div>
-
-                <div class="contact-line">
-                    <b>Website</b>
-                    <span class="contact-value">
-                        <a href="https://hsk2636.github.io" target="_blank" rel="noopener noreferrer">
-                            hsk2636.github.io
-                        </a>
-                    </span>
-                </div>
-            </div>
-
-            <!-- SKILLS -->
-            <div>
-                <h2 class="section-title">Skills</h2>
-
-                <div class="skill-box">
-                    <div class="skill-name">Oracle SQL / PL-SQL</div>
-                    <div class="skill-meta">Stored Procedure, Package, Performance Tuning 기초</div>
-                    <div class="bar"><div class="bar-fill" style="width: 85%;"></div></div>
-                    <div class="tag-row">
-                        <span class="tag">JOIN / Subquery</span>
-                        <span class="tag">Cursor</span>
-                        <span class="tag">NVL / DECODE</span>
-                    </div>
-                </div>
-
-                <div class="skill-box">
-                    <div class="skill-name">MES / PDA / ERP</div>
-                    <div class="skill-meta">LOT 흐름, PDA 스캔 로직, ERP 인터페이스 이해</div>
-                    <div class="bar"><div class="bar-fill" style="width: 80%;"></div></div>
-                    <div class="tag-row">
-                        <span class="tag">LOT Tracking</span>
-                        <span class="tag">입·출고</span>
-                        <span class="tag">ERP I/F</span>
-                    </div>
-                </div>
-
-                <div class="skill-box">
-                    <div class="skill-name">C# (WinForms)</div>
-                    <div class="skill-meta">이벤트 처리, DB 연동 화면 분석 중심</div>
-                    <div class="bar"><div class="bar-fill" style="width: 70%;"></div></div>
-                    <div class="tag-row">
-                        <span class="tag">WinForms</span>
-                        <span class="tag">Event Handler</span>
-                    </div>
-                </div>
-
-                <div class="skill-box">
-                    <div class="skill-name">Python (Pandas)</div>
-                    <div class="skill-meta">데이터 전처리(Data Preprocessing) 실습 중심</div>
-                    <div class="bar"><div class="bar-fill" style="width: 75%;"></div></div>
-                    <div class="tag-row">
-                        <span class="tag">Pandas</span>
-                        <span class="tag">EDA</span>
-                        <span class="tag">SMOTE</span>
-                    </div>
-                </div>
-
-                <div class="skill-box">
-                    <div class="skill-name">NiFi (ETL)</div>
-                    <div class="skill-meta">파일 수집 및 DB 적재 흐름 이해</div>
-                    <div class="bar"><div class="bar-fill" style="width: 60%;"></div></div>
-                    <div class="tag-row">
-                        <span class="tag">Flow Design</span>
-                        <span class="tag">GetFile</span>
-                        <span class="tag">PutDatabaseRecord</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- EDUCATION -->
-            <div>
-                <h2 class="section-title">Education</h2>
-
-                <div class="item">
-                    <div class="item-title">Practical Data Preprocessing</div>
-                    <div class="item-sub">2025</div>
-                    <div class="item-sub">
-                        Missing values, Encoding, SMOTE, Pandas 실습
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="item-title">Oracle SQL / PL-SQL 실무 과정</div>
-                    <div class="item-sub">2024–Present</div>
-                    <div class="item-sub">
-                        제조 데이터 중심 SQL/PL-SQL 실습 및 쿼리 튜닝 기초
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- RIGHT SIDE -->
-        <div class="right">
-
-            <!-- SUMMARY -->
-            <div>
-                <h2 class="section-title">Profile Summary</h2>
-                <p class="text-body">
-                    제조 IT(MES/PDA/ERP) 기반 환경에서 Oracle SQL 및 PL/SQL을 활용해 생산·출하·품질 데이터를 다루는 개발자.
-                    LOT 상태 흐름(인수등록/작업시작/작업완료/인계등록), PDA 스캔 로직, ERP 연계 프로시저를 직접 분석하며 
-                    공정 흐름(Process Flow)과 데이터 흐름(Data Flow)을 함께 이해하는 실무형 엔지니어를 목표로 하고 있음.
-                </p>
-            </div>
-
-            <!-- EXPERIENCE -->
-            <div>
-                <h2 class="section-title">Experience</h2>
-
-                <div class="item">
-                    <div class="item-title">SQL Developer (Manufacturing IT)</div>
-                    <div class="item-sub">2024–Present</div>
-                    <ul style="padding-left: 18px; line-height: 1.6; font-size: 14px;">
-                        <li>생산지시, LOT 관리, 공정 진행, 출고·입고 프로세스 PL/SQL 분석 및 흐름 정리</li>
-                        <li>PDA 자재/출하/입고 프로시저 로직 해석, 스캔 예외 상황(오입력, 중복 스캔) 케이스 정리</li>
-                        <li>통합 품질 정보 집계 쿼리(NVL, DECODE, GROUP BY)를 이용한 품질 데이터 집계 구조 이해</li>
-                        <li>C# WinForms 기반 생산/품질 화면 이벤트 처리 → DB 패키지 호출 흐름 문서화</li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <!-- PROJECTS -->
-            <div>
-                <h2 class="section-title">Projects</h2>
-
-                <div class="project-card">
-                    <div class="project-title">통합 품질 정보 SQL 분석</div>
-                    <div class="project-period">2024</div>
-                    <div class="project-tech">Oracle SQL, PL-SQL</div>
-                    <div class="project-role">역할: 집계 쿼리 구조 분석 및 문서화</div>
-                    <p class="text-body">
-                        LOT별/버전별 GOOD/BAD/M2 데이터와 불량률을 계산하는 집계 쿼리 분석.  
-                        NVL 및 DECODE를 이용해 합계 행(TOTAL ROW)과 공정별 데이터를 동시에 표현하는 로직을 정리하고,
-                        품질 지표 계산 흐름을 문서로 남김.
-                    </p>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-title">PDA 출고/입고/재입고 프로시저 분석</div>
-                    <div class="project-period">2024</div>
-                    <div class="project-tech">Oracle PL-SQL, PDA(Android)</div>
-                    <div class="project-role">역할: PDA 스캔 → DB 반영 프로세스 정리</div>
-                    <p class="text-body">
-                        현장의 PDA 스캔 흐름과 DB 반영 로직을 분석하여  
-                        출고 유형(ETC/MOV/SAL) 및 재입고, ERP 인터페이스 처리 순서를 단계별로 문서화.
-                        LOT 상태 변경 시점과 인터페이스 테이블 적재 기준을 도식화함.
-                    </p>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-title">Data Preprocessing 실습 노트</div>
-                    <div class="project-period">2025</div>
-                    <div class="project-tech">Python, Pandas, SMOTE</div>
-                    <div class="project-role">역할: 실습 코드와 개념 요약 정리</div>
-                    <p class="text-body">
-                        결측치 처리(fillna), Label Encoding/One-Hot Encoding,  
-                        SMOTE 기반 불균형 데이터 처리 실습을 진행하고, 각 방법의 특징과 주의점을 노트 형태로 정리.
-                        향후 제조 데이터 분석에 적용할 수 있는 전처리 패턴을 정리함.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-</body>
-</html>
+/* ===== 기본 공통 스타일 (Mobile-first) ===== */
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f5f7fb;
+    color: #333;
+}
+
+/* HEADER */
+.header {
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    color: #fff;
+    padding: 40px 20px 32px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 26px;
+    margin-bottom: 6px;
+    font-weight: 800;
+}
+
+.header h3 {
+    margin: 0;
+    font-weight: 400;
+    opacity: 0.9;
+    font-size: 14px;
+}
+
+.header p {
+    margin-top: 14px;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    font-size: 13px;
+}
+
+/* LAYOUT - Mobile 기준: 1열 */
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1100px;
+    margin: 24px auto 32px;
+    gap: 16px;
+    padding: 0 16px 24px;
+}
+
+.left, .right {
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+    width: 100%;
+}
+
+/* SECTION TITLE */
+.section-title {
+    font-size: 17px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    border-left: 5px solid #6366f1;
+    padding-left: 10px;
+}
+
+/* PROFILE IMAGE */
+.profile-pic {
+    width: 95px;
+    height: 95px;
+    border-radius: 15px;
+    object-fit: cover;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* LISTS / ITEMS */
+.info-box, .skill-box, .item {
+    margin-bottom: 18px;
+}
+
+.item-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.item-sub {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-bottom: 5px;
+}
+
+/* CONTACT */
+.contact-line {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.contact-line b {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.contact-value {
+    text-align: left;
+    max-width: 100%;
+    word-break: break-all;
+    font-size: 13px;
+}
+
+.contact-value a {
+    text-decoration: none;
+    color: #6366f1;
+    font-weight: 500;
+}
+
+.contact-value a:hover {
+    text-decoration: underline;
+}
+
+/* SKILLS */
+.skill-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.bar {
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+}
+
+/* PROJECT CARDS */
+.project-card {
+    padding: 16px;
+    border-radius: 12px;
+    background: #fafafa;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 16px;
+    transition: 0.2s;
+}
+
+.project-card:hover {
+    background: #fff;
+    border-color: #c7d2fe;
+    box-shadow: 0 4px 10px rgba(99,102,241,0.15);
+    transform: translateY(-1px);
+}
+
+.project-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.project-tech {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-bottom: 8px;
+}
+
+/* SUMMARY TEXT */
+.text-body {
+    line-height: 1.6;
+    font-size: 13px;
+}
+
+/* 기본 ul 스타일 약간 줄이기 */
+.right ul {
+    padding-left: 18px;
+    line-height: 1.55;
+    font-size: 13px;
+}
+
+/* ================================
+   1단계: 태블릿 이상 (폭 768px~)
+   ================================ */
+@media (min-width: 768px) {
+
+    .header {
+        padding: 50px 24px 40px;
+    }
+
+    .header h1 {
+        font-size: 32px;
+    }
+
+    .header h3 {
+        font-size: 15px;
+    }
+
+    .header p {
+        max-width: 640px;
+        font-size: 14px;
+    }
+
+    .container {
+        flex-direction: row;     /* 2열로 변경 */
+        gap: 20px;
+        padding: 0 20px 32px;
+        margin-top: 32px;
+    }
+
+    .left {
+        flex: 0 0 34%;          /* 왼쪽 34% 고정 */
+    }
+
+    .right {
+        flex: 1;                /* 오른쪽 나머지 */
+    }
+
+    .left, .right {
+        padding: 24px;
+    }
+
+    .section-title {
+        font-size: 18px;
+        margin-bottom: 14px;
+    }
+
+    .profile-pic {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 18px;
+    }
+
+    .contact-line {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .contact-value {
+        text-align: right;
+        max-width: 60%;
+    }
+
+    .item-title {
+        font-size: 16px;
+    }
+
+    .item-sub {
+        font-size: 13px;
+    }
+
+    .text-body {
+        font-size: 14px;
+    }
+
+    .project-title {
+        font-size: 17px;
+    }
+
+    .right ul {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+}
+
+/* =================================
+   2단계: 데스크탑 넓은 화면 (1200px~)
+   ================================= */
+@media (min-width: 1200px) {
+    .header {
+        padding: 60px 30px 45px;
+    }
+
+    .header h1 {
+        font-size: 40px;
+    }
+
+    .header h3 {
+        font-size: 16px;
+    }
+
+    .header p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .left, .right {
+        padding: 26px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .project-card {
+        padding: 18px;
+        margin-bottom: 20px;
+    }
+
+    .project-title {
+        font-size: 18px;
+    }
+}
