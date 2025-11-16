@@ -191,12 +191,18 @@ body {
    모바일 디테일 튜닝 (폭 600px 이하)
    ================================= */
 @media (max-width: 600px) {
+
+    /* 배경을 흰색으로 해서 양옆 회색 띠 안 보이게 */
+    body {
+        background: #ffffff;
+    }
+
     .header {
-        padding: 28px 18px 26px;
+        padding: 24px 14px 22px;
     }
 
     .header h1 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .header h3 {
@@ -205,33 +211,34 @@ body {
 
     .header p {
         font-size: 13px;
-        max-width: 95%;
+        max-width: 100%;
     }
 
-    /* 👉 모바일에서는 거의 꽉 차게 */
+    /* 👉 모바일에서는 카드가 화면을 거의 꽉 채우도록 */
     .container {
         max-width: 100%;
         width: 100%;
-        margin: 8px 0 20px;
-        padding: 0 10px 20px;
-        gap: 14px;
+        margin: 8px 0 16px;
+        padding: 0;          /* 좌우 padding 제거 */
+        gap: 12px;
     }
 
     .left,
     .right {
-        border-radius: 12px;
-        padding: 18px;
+        border-radius: 0;    /* 모서리 둥근거 제거 → 화면 끝까지 붙는 느낌 */
+        padding: 18px 14px;
+        box-shadow: none;    /* 그림자 제거해서 “카드 박스” 느낌 줄이기 */
     }
 
     .profile-pic {
-        width: 85px;
-        height: 85px;
-        margin-bottom: 14px;
+        width: 80px;
+        height: 80px;
+        margin-bottom: 12px;
     }
 
     .section-title {
         font-size: 16px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     .right ul {
@@ -244,6 +251,10 @@ body {
    1단계: 태블릿 이상 (폭 768px~)
    ================================ */
 @media (min-width: 768px) {
+    body {
+        background: #f5f7fb;
+    }
+
     .header {
         padding: 50px 24px 40px;
     }
@@ -282,6 +293,8 @@ body {
     .left,
     .right {
         padding: 24px;
+        border-radius: 10px;
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
     }
 
     .section-title {
