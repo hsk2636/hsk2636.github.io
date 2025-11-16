@@ -208,10 +208,19 @@ body {
         max-width: 95%;
     }
 
+    /* 👉 모바일에서는 거의 꽉 차게 */
     .container {
-        margin-top: 10px;
-        padding: 0 14px 20px;
+        max-width: 100%;
+        width: 100%;
+        margin: 8px 0 20px;
+        padding: 0 10px 20px;
         gap: 14px;
+    }
+
+    .left,
+    .right {
+        border-radius: 12px;
+        padding: 18px;
     }
 
     .profile-pic {
@@ -257,10 +266,13 @@ body {
         gap: 20px;
         padding: 0 20px 32px;
         margin-top: 32px;
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .left {
-        flex: 0 0 30%; /* 왼쪽 30% 고정 (패드/PC 비율 개선) */
+        flex: 0 0 30%; /* 왼쪽 30% 고정 */
     }
 
     .right {
