@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
+    <!-- 모바일 화면을 실제 기기 폭에 딱 맞게 고정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>권한수 | Creative Resume & Portfolio</title>
 
@@ -15,20 +16,22 @@
 <body>
 
     <!-- ===== HEADER ===== -->
-    <div class="header">
-        <h1>권한수 (Hansoo Kwon)</h1>
-        <h3>SQL Developer · PL/SQL Engineer · Manufacturing IT</h3>
-        <p>
-            Oracle SQL(PL/SQL), MES/PDA/ERP 프로세스 분석, 데이터 전처리(Data Preprocessing)를 기반으로  
-            제조 현장의 생산·품질·출하 데이터를 다루는 데이터 엔지니어형 개발자.
-        </p>
-    </div>
+    <header class="header">
+        <div class="header-inner">
+            <h1>권한수 (Hansoo Kwon)</h1>
+            <h3>SQL Developer · PL/SQL Engineer · Manufacturing IT</h3>
+            <p>
+                Oracle SQL(PL/SQL), MES/PDA/ERP 프로세스 분석, 데이터 전처리(Data Preprocessing)를 기반으로  
+                제조 현장의 생산·품질·출하 데이터를 다루는 데이터 엔지니어형 개발자.
+            </p>
+        </div>
+    </header>
 
     <!-- ===== CONTENT ===== -->
-    <div class="container">
+    <main class="container">
 
         <!-- LEFT SIDE -->
-        <div class="left">
+        <section class="left">
 
             <!-- PROFILE IMAGE -->
             <img src="img/profile.jpg" alt="프로필 사진" class="profile-pic">
@@ -118,29 +121,29 @@
                 </div>
             </div>
 
-        </div>
+        </section>
 
         <!-- RIGHT SIDE -->
-        <div class="right">
+        <section class="right">
 
             <!-- SUMMARY -->
-            <div>
+            <section>
                 <h2 class="section-title">Profile Summary</h2>
                 <p class="text-body">
                     제조 IT(MES/PDA/ERP) 기반 환경에서 Oracle SQL 및 PL/SQL을 활용해 생산·출하·품질 데이터를 다루는 개발자.
                     LOT 상태 흐름(인수등록/작업시작/작업완료/인계등록), PDA 스캔 로직, ERP 연계 프로시저를 직접 분석하며 
                     공정 흐름(Process Flow)과 데이터 흐름(Data Flow)을 함께 이해하는 실무형 엔지니어.
                 </p>
-            </div>
+            </section>
 
             <!-- EXPERIENCE -->
-            <div>
+            <section>
                 <h2 class="section-title">Experience</h2>
 
                 <div class="item">
                     <div class="item-title">SQL Developer (Manufacturing IT)</div>
                     <div class="item-sub">2024–Present</div>
-                    <ul style="padding-left: 18px; line-height: 1.6; font-size: 14px;">
+                    <ul>
                         <li>생산지시, LOT 관리, 공정 진행, 출고·입고 프로세스 PL/SQL 분석 및 흐름 정리</li>
                         <li>PDA 자재/출하/입고 프로시저 로직 해석 및 스캔 예외 케이스 정리</li>
                         <li>통합 품질 정보 집계 쿼리(NVL, DECODE, GROUP BY)를 이용한 품질 데이터 집계 구조 이해</li>
@@ -148,13 +151,13 @@
                     </ul>
                 </div>
 
-            </div>
+            </section>
 
             <!-- PROJECTS -->
-            <div>
+            <section>
                 <h2 class="section-title">Projects</h2>
 
-                <div class="project-card">
+                <article class="project-card">
                     <div class="project-title">통합 품질 정보 SQL 분석</div>
                     <div class="project-tech">Oracle SQL, PL-SQL</div>
                     <p class="text-body">
@@ -162,31 +165,30 @@
                         NVL 및 DECODE를 이용해 합계 행(TOTAL ROW)을 표현하는 로직을 정리하고,
                         품질 지표 계산 흐름을 문서화.
                     </p>
-                </div>
+                </article>
 
-                <div class="project-card">
+                <article class="project-card">
                     <div class="project-title">PDA 출고/입고/재입고 프로시저 분석</div>
                     <div class="project-tech">Oracle PL-SQL, PDA(Android)</div>
                     <p class="text-body">
                         현장의 PDA 스캔 흐름과 DB 반영 로직을 분석하여  
                         출고 유형(ETC/MOV/SAL) 및 재입고, ERP 인터페이스 처리 순서를 단계별로 문서화.
                     </p>
-                </div>
+                </article>
 
-                <div class="project-card">
+                <article class="project-card">
                     <div class="project-title">Data Preprocessing 실습 노트</div>
                     <div class="project-tech">Python, Pandas, SMOTE</div>
                     <p class="text-body">
                         결측치 처리(fillna), Label Encoding/One-Hot Encoding,  
                         SMOTE 기반 불균형 데이터 처리 실습을 진행하고, 각 방법의 특징과 주의점을 노트로 정리.
                     </p>
-                </div>
+                </article>
 
-            </div>
+            </section>
 
-        </div>
-    </div>
+        </section>
+    </main>
 
 </body>
 </html>
-
