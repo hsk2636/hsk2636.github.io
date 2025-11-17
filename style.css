@@ -1,6 +1,5 @@
 /* ===== 기본 공통 스타일 (Mobile-first) ===== */
 
-/* 브라우저 기본 여백 완전 제거 */
 html, body {
     margin: 0;
     padding: 0;
@@ -10,32 +9,39 @@ body {
     font-family: 'Inter', sans-serif;
     background: #f5f7fb;
     color: #333;
+    overflow-x: hidden; /* 혹시라도 vw 계산 오류로 옆으로 튀는 것 방지 */
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 .header {
     background: linear-gradient(135deg, #6366f1, #ec4899);
     color: #fff;
-    padding: 32px 16px 28px;
-    text-align: center;
-    width: 100%;
+    width: 100vw;                          /* 뷰포트 전체 */
+    margin-left: calc(50% - 50vw);         /* 가운데 기준으로 양쪽 끝까지 */
     box-sizing: border-box;
 }
 
-.header h1 {
+.header-inner {
+    max-width: 1100px;
+    padding: 32px 16px 28px;
+    margin: 0 auto;                        /* 중앙 정렬 */
+    text-align: center;
+}
+
+.header-inner h1 {
     font-size: 24px;
     margin-bottom: 6px;
     font-weight: 800;
 }
 
-.header h3 {
+.header-inner h3 {
     margin: 0;
     font-weight: 400;
     opacity: 0.9;
     font-size: 13px;
 }
 
-.header p {
+.header-inner p {
     margin-top: 14px;
     max-width: 100%;
     padding: 0 8px;
@@ -45,13 +51,13 @@ body {
     font-size: 13px;
 }
 
-/* LAYOUT - 기본: 모바일 1열, 화면 꽉 채움 */
+/* ===== LAYOUT (기본: 모바일 1열) ===== */
 .container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 100%;
-    margin: 16px 0 24px;
+    max-width: 1100px;
+    margin: 16px auto 24px;
     padding: 0 16px;
     box-sizing: border-box;
     gap: 16px;
@@ -198,31 +204,30 @@ body {
 }
 
 /* ================================
-   1단계: 태블릿 이상 (폭 768px~)
+   태블릿 이상 (768px~)
    ================================ */
 @media (min-width: 768px) {
 
-    .header {
+    .header-inner {
         padding: 48px 24px 40px;
     }
 
-    .header h1 {
+    .header-inner h1 {
         font-size: 30px;
     }
 
-    .header h3 {
+    .header-inner h3 {
         font-size: 14px;
     }
 
-    .header p {
+    .header-inner p {
         font-size: 14px;
         max-width: 640px;
         padding: 0;
     }
 
     .container {
-        flex-direction: row;          /* 2열 */
-        max-width: 1100px;
+        flex-direction: row;
         margin: 32px auto 40px;
         padding: 0 24px 32px;
         gap: 20px;
@@ -263,29 +268,28 @@ body {
 }
 
 /* ================================
-   2단계: 데스크탑 넓은 화면 (1200px~)
+   데스크탑 넓은 화면 (1200px~)
    ================================ */
 @media (min-width: 1200px) {
 
-    .header {
+    .header-inner {
         padding: 60px 30px 45px;
     }
 
-    .header h1 {
+    .header-inner h1 {
         font-size: 36px;
     }
 
-    .header h3 {
+    .header-inner h3 {
         font-size: 15px;
     }
 
-    .header p {
+    .header-inner p {
         font-size: 15px;
         line-height: 1.7;
     }
 
     .container {
-        max-width: 1100px;
         margin-top: 40px;
         margin-bottom: 40px;
         padding: 0 30px 40px;
