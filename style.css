@@ -9,38 +9,41 @@ body {
     font-family: 'Inter', sans-serif;
     background: #f5f7fb;
     color: #333;
-    overflow-x: hidden; /* 혹시라도 vw 계산 오류로 옆으로 튀는 것 방지 */
+}
+
+/* 전체 레이아웃 박스 */
+.page {
+    max-width: 1100px;      /* 헤더 + 내용 공통 기준 폭 */
+    margin: 0 auto 40px;    /* 가운데 정렬 */
+    padding: 0 16px;
+    box-sizing: border-box;
 }
 
 /* ===== HEADER ===== */
 .header {
     background: linear-gradient(135deg, #6366f1, #ec4899);
     color: #fff;
-    width: 100%;
+    padding: 32px 16px 28px;
+    text-align: center;
+    border-radius: 18px;
+    box-shadow: 0 5px 16px rgba(0,0,0,0.15);
     box-sizing: border-box;
 }
 
-.header-inner {
-    max-width: 1100px;          /* 아래 container와 동일한 폭 */
-    margin: 0 auto;             /* 가운데 정렬 */
-    padding: 32px 16px 28px;
-    text-align: center;
-}
-
-.header-inner h1 {
+.header h1 {
     font-size: 24px;
     margin-bottom: 6px;
     font-weight: 800;
 }
 
-.header-inner h3 {
+.header h3 {
     margin: 0;
     font-weight: 400;
     opacity: 0.9;
     font-size: 13px;
 }
 
-.header-inner p {
+.header p {
     margin-top: 14px;
     max-width: 100%;
     padding: 0 8px;
@@ -55,10 +58,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 1100px;          /* 헤더와 똑같이 */
-    margin: 16px auto 24px;
-    padding: 0 16px;
-    box-sizing: border-box;
+    margin-top: 20px;
     gap: 16px;
 }
 
@@ -66,9 +66,10 @@ body {
 .right {
     width: 100%;
     padding: 18px 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     background: #ffffff;
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
 }
 
 /* SECTION TITLE */
@@ -207,29 +208,27 @@ body {
    ================================ */
 @media (min-width: 768px) {
 
-    .header-inner {
-        padding: 48px 24px 40px;
+    .header {
+        padding: 40px 24px 34px;
     }
 
-    .header-inner h1 {
+    .header h1 {
         font-size: 30px;
     }
 
-    .header-inner h3 {
+    .header h3 {
         font-size: 14px;
     }
 
-    .header-inner p {
+    .header p {
         font-size: 14px;
-        max-width: 640px;
         padding: 0;
     }
 
     .container {
-        flex-direction: row;
-        margin: 32px auto 40px;
-        padding: 0 24px 32px;
+        flex-direction: row;   /* 2열 */
         gap: 20px;
+        margin-top: 28px;
     }
 
     .left {
@@ -242,8 +241,6 @@ body {
 
     .left,
     .right {
-        border-radius: 12px;
-        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
         padding: 22px 20px;
     }
 
@@ -271,27 +268,21 @@ body {
    ================================ */
 @media (min-width: 1200px) {
 
-    .header-inner {
-        padding: 60px 30px 45px;
+    .header {
+        padding: 50px 30px 40px;
     }
 
-    .header-inner h1 {
+    .header h1 {
         font-size: 36px;
     }
 
-    .header-inner h3 {
+    .header h3 {
         font-size: 15px;
     }
 
-    .header-inner p {
+    .header p {
         font-size: 15px;
         line-height: 1.7;
-    }
-
-    .container {
-        margin-top: 40px;
-        margin-bottom: 40px;
-        padding: 0 30px 40px;
     }
 
     .left,
