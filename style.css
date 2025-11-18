@@ -16,15 +16,14 @@ body {
 .header {
     background: linear-gradient(135deg, #6366f1, #ec4899);
     color: #fff;
-    width: 100vw;                          /* 뷰포트 전체 */
-    margin-left: calc(50% - 50vw);         /* 가운데 기준으로 양쪽 끝까지 */
+    width: 100%;
     box-sizing: border-box;
 }
 
 .header-inner {
-    max-width: 1100px;
+    max-width: 1100px;          /* 아래 container와 동일한 폭 */
+    margin: 0 auto;             /* 가운데 정렬 */
     padding: 32px 16px 28px;
-    margin: 0 auto;                        /* 중앙 정렬 */
     text-align: center;
 }
 
@@ -56,7 +55,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 1100px;
+    max-width: 1100px;          /* 헤더와 똑같이 */
     margin: 16px auto 24px;
     padding: 0 16px;
     box-sizing: border-box;
