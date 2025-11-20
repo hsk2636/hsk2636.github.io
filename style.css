@@ -423,6 +423,39 @@ body {
 }
 
 /* ================================
+   포트폴리오 링크 버튼
+   ================================ */
+
+/* 포트폴리오 링크 버튼 영역 */
+.portfolio-links {
+    margin-top: 18px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* 서브 버튼 스타일 (헤더 Resume 버튼보다 살짝 낮은 톤) */
+.btn-secondary {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #eef2ff;
+    color: #3730a3;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #c7d2fe;
+    transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn-secondary:hover {
+    background: #e0e7ff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(129,140,248,0.4);
+}
+
+/* ================================
    다크 모드 지원
    ================================ */
 @media (prefers-color-scheme: dark) {
@@ -461,5 +494,15 @@ body {
 
     .bar {
         background: #374151;
+    }
+
+    .btn-secondary {
+        background: #111827;
+        border-color: #374151;
+        color: #e5e7eb;
+    }
+
+    .btn-secondary:hover {
+        background: #1f2937;
     }
 }
