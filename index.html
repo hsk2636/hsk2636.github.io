@@ -8,8 +8,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="style.css">
+    <!-- External CSS (v=3 캐시 무시용) -->
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 
 <body>
@@ -25,6 +25,13 @@
                 Oracle SQL(PL/SQL), MES/PDA/ERP 프로세스 분석, 데이터 전처리(Data Preprocessing)를 기반으로  
                 제조 현장의 생산·품질·출하 데이터를 다루는 데이터 엔지니어형 개발자.
             </p>
+
+            <!-- Resume 다운로드 버튼 -->
+            <div class="header-actions">
+                <!-- 나중에 resume.pdf 올리면 자동으로 다운로드 됨 -->
+                <a href="resume.pdf" class="btn-download" download>📄 Resume 다운로드</a>
+                <!-- 필요 없으면 위 a 태그 삭제해도 됨 -->
+            </div>
         </header>
 
         <!-- ===== CONTENT ===== -->
@@ -79,27 +86,37 @@
 
                     <div class="skill-box">
                         <div class="skill-name">Oracle SQL / PL-SQL</div>
-                        <div class="bar"><div class="bar-fill" style="width: 85%;"></div></div>
+                        <div class="bar">
+                            <div class="bar-fill" style="--percent: 85%;"></div>
+                        </div>
                     </div>
 
                     <div class="skill-box">
                         <div class="skill-name">MES / PDA / ERP</div>
-                        <div class="bar"><div class="bar-fill" style="width: 80%;"></div></div>
+                        <div class="bar">
+                            <div class="bar-fill" style="--percent: 80%;"></div>
+                        </div>
                     </div>
 
                     <div class="skill-box">
                         <div class="skill-name">C# (WinForms)</div>
-                        <div class="bar"><div class="bar-fill" style="width: 70%;"></div></div>
+                        <div class="bar">
+                            <div class="bar-fill" style="--percent: 70%;"></div>
+                        </div>
                     </div>
 
                     <div class="skill-box">
                         <div class="skill-name">Python (Pandas)</div>
-                        <div class="bar"><div class="bar-fill" style="width: 75%;"></div></div>
+                        <div class="bar">
+                            <div class="bar-fill" style="--percent: 75%;"></div>
+                        </div>
                     </div>
 
                     <div class="skill-box">
                         <div class="skill-name">NiFi (ETL)</div>
-                        <div class="bar"><div class="bar-fill" style="width: 60%;"></div></div>
+                        <div class="bar">
+                            <div class="bar-fill" style="--percent: 60%;"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -157,9 +174,20 @@
                 <section>
                     <h2 class="section-title">Projects</h2>
 
+                    <!-- Project 1 -->
                     <article class="project-card">
-                        <div class="project-title">통합 품질 정보 SQL 분석</div>
-                        <div class="project-tech">Oracle SQL, PL-SQL</div>
+                        <div class="project-header">
+                            <div>
+                                <div class="project-title">통합 품질 정보 SQL 분석</div>
+                                <div class="project-tech">Oracle SQL, PL-SQL</div>
+                            </div>
+                            <!-- 프로젝트 링크 (원하면 주소 수정) -->
+                            <a href="https://github.com/hsk2636" class="project-link" target="_blank" rel="noopener noreferrer">
+                                GitHub 보기 →
+                            </a>
+                        </div>
+                        <!-- 필요하면 실제 캡처 이미지 넣기 -->
+                        <!-- <img src="img/project_quality.png" alt="통합 품질 정보 SQL 분석" class="project-img"> -->
                         <p class="text-body">
                             LOT별/버전별 GOOD/BAD/M2 데이터와 불량률을 계산하는 집계 쿼리 분석.  
                             NVL 및 DECODE를 이용해 합계 행(TOTAL ROW)을 표현하는 로직을 정리하고,
@@ -167,18 +195,36 @@
                         </p>
                     </article>
 
+                    <!-- Project 2 -->
                     <article class="project-card">
-                        <div class="project-title">PDA 출고/입고/재입고 프로시저 분석</div>
-                        <div class="project-tech">Oracle PL-SQL, PDA(Android)</div>
+                        <div class="project-header">
+                            <div>
+                                <div class="project-title">PDA 출고/입고/재입고 프로시저 분석</div>
+                                <div class="project-tech">Oracle PL-SQL, PDA(Android)</div>
+                            </div>
+                            <a href="https://github.com/hsk2636" class="project-link" target="_blank" rel="noopener noreferrer">
+                                GitHub 보기 →
+                            </a>
+                        </div>
+                        <!-- <img src="img/project_pda.png" alt="PDA 출고/입고/재입고 프로시저 분석" class="project-img"> -->
                         <p class="text-body">
                             현장의 PDA 스캔 흐름과 DB 반영 로직을 분석하여  
                             출고 유형(ETC/MOV/SAL) 및 재입고, ERP 인터페이스 처리 순서를 단계별로 문서화.
                         </p>
                     </article>
 
+                    <!-- Project 3 -->
                     <article class="project-card">
-                        <div class="project-title">Data Preprocessing 실습 노트</div>
-                        <div class="project-tech">Python, Pandas, SMOTE</div>
+                        <div class="project-header">
+                            <div>
+                                <div class="project-title">Data Preprocessing 실습 노트</div>
+                                <div class="project-tech">Python, Pandas, SMOTE</div>
+                            </div>
+                            <a href="https://github.com/hsk2636" class="project-link" target="_blank" rel="noopener noreferrer">
+                                노트 보기 →
+                            </a>
+                        </div>
+                        <!-- <img src="img/project_preprocess.png" alt="Data Preprocessing 실습 노트" class="project-img"> -->
                         <p class="text-body">
                             결측치 처리(fillna), Label Encoding/One-Hot Encoding,  
                             SMOTE 기반 불균형 데이터 처리 실습을 진행하고, 각 방법의 특징과 주의점을 노트로 정리.
