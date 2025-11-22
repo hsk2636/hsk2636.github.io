@@ -89,6 +89,7 @@ ORDER BY recent.LAST_ORDER_DATE DESC;
 
 ## 2-2. SQL 코드
 
+```sql
 SELECT
     c.CUST_ID,
     c.CUST_NAME,
@@ -101,7 +102,7 @@ WHERE EXISTS (
        AND o.ORDER_DATE >= ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -3)
 )
 ORDER BY c.CUST_ID;
-
+```
 ---
 
 ## 2-3. 설명
@@ -138,6 +139,8 @@ ORDER BY c.CUST_ID;
 | IN     | 서브쿼리 전체 결과와 비교  | 코드 단순       | 대용량 서브쿼리에서 느림    |
 | EXISTS | 조건 충족 시 즉시 TRUE | 빠르고 최적화됨    | 값 반환할 때는 사용 불가   |
 | JOIN   | 양쪽 테이블 결합       | 다중 컬럼 비교 가능 | 불필요한 JOIN 시 오버헤드 |
+
+---
 
 # 4. 요약
 
