@@ -64,11 +64,11 @@ SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
 
 ```text
 --------------------------------------------------------------------------------
-| Id  | Operation           | Name      | Rows | Cost | ...
+| Id  | Operation           | Name      | Rows | Cost | ... |
 --------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT    |           |    1 |  999 | ...
-|   1 |  SORT AGGREGATE     |           |    1 |      | ...
-|   2 |   TABLE ACCESS FULL | TB_ORDER  |   X  |  999 | ...
+|   0 | SELECT STATEMENT    |           |    1 |  999 | ... |
+|   1 |  SORT AGGREGATE     |           |    1 |      | ... |
+|   2 |   TABLE ACCESS FULL | TB_ORDER  |   X  |  999 | ... |
 --------------------------------------------------------------------------------
 ```
 ---
@@ -161,11 +161,11 @@ SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
 
 ```text
 --------------------------------------------------------------------------------
-| Id  | Operation                    | Name              | Rows | Cost | ...
+| Id  | Operation                    | Name              | Rows | Cost | ... |
 --------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT             |                   |    1 |  100 | ...
-|   1 |  SORT AGGREGATE              |                   |    1 |      | ...
-|   2 |   INDEX RANGE SCAN           | IDX_TB_ORDER_DATE |   X  |  100 | ...
+|   0 | SELECT STATEMENT             |                   |    1 |  100 | ... |
+|   1 |  SORT AGGREGATE              |                   |    1 |      | ... |
+|   2 |   INDEX RANGE SCAN           | IDX_TB_ORDER_DATE |   X  |  100 | ... |
 --------------------------------------------------------------------------------
 ```
 
