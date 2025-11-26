@@ -160,8 +160,104 @@ END PR_JOB_START;
 
 # 3. LOT 작업 완료 등록 (Finish)
 
-(원한다면 추가로 작성 가능!
-작업 완료 → LOT 상태 변경 + 완료 로그 기록 + OUT 메시지 구조)
+## 3-1. 문제 정의
+
+입력값:
+
+- LOT 번호
+
+- 완료 수량
+
+- 사용자 ID
+
+해야 할 일:
+
+- LOT 상태를 “작업 완료(FINISH)” 상태로 변경
+
+- 완료 로그 기록(JOB_FINISH_LOG 테이블 등)
+
+- OUT 메시지로 완료 여부 반환
+
+---
+
+## 3-2. SQL 코드
+
+```sql
+CREATE OR REPLACE PROCEDURE PR_JOB_FINISH (
+    p_lot_no        IN  VARCHAR2,
+    p_finish_qty    IN  NUMBER,
+    p_user_id       IN  VARCHAR2,
+    p_return_msg    OUT VARCHAR2
+) IS
+BEGIN
+    ----------------------------------------------------------------
+    -- 1. LOT 상태를 완료 상태로 변경 (예: STATUS = '3')
+    ----------------------------------------------------------------
+    UPDATE TB_LOT
+       SET STATUS      = '3',
+           FINISH_QTY  = p_finish_qty,
+           FINISH_TIME = SYSDATE,
+           FINISH_USER = p_user_id
+     WHERE LOT_NO = p_lot_no;
+
+    ----------------------------------------------------------------
+    -- 2. 로그 기록
+    ----------------------------------------------------------------
+    INSERT INTO TB_JOB_LOG (
+        LOG_ID,
+        LOT_NO,
+        LOG_TYPE,
+        LOG_QTY,
+        USER_ID,
+        LOG_TIME
+    ) VALUES (
+        SEQ_JOB_LOG.NEXTVAL,
+        p_lot_no,
+        'FINISH',
+        p_finish_qty,
+        p_user_id,
+        SYSDATE
+    );
+
+    ----------------------------------------------------------------
+    -- 3. OUT 메시지 반환
+    ----------------------------------------------------------------
+    p_return_msg := 'SUCCESS: LOT 작업 완료 등록됨';
+
+EXCEPTION
+    WHEN OTHERS THEN
+        p_return_msg := 'ERROR: ' || SQLERRM;
+END PR_JOB_FINISH;
+/
+```
+
+## 3-3. 설명
+
+- LOT 상태 변경
+→ 실무에서는 STATUS 값으로 “작업전(1) / 작업중(2) / 작업완료(3)” 등 사용
+
+- FINISH_QTY 저장
+→ 실적 집계 시 필요한 핵심 정보
+
+- TB_JOB_LOG 기록
+→ 작업 시작/완료/불량 등의 공정 이벤트 기록
+
+- OUT 메시지
+→ PDA/WinForm 화면에서 성공·오류 메시지 표시 용도
+ 
+---
+
+## 3-4. 실무 포인트
+
+- 완료 시 수량 검증(작업 시작 수량보다 큰지 여부 등) 필요
+
+- LOT 상태가 이미 완료 상태라면 UPDATE 제외 & 메시지 반환
+
+- ERP 연계가 필요한 경우
+→ 완료 시점에 WIP 이동/생산실적 등록 인터페이스 호출
+
+- PDA에서는
+→ 현장 작업자가 스캔 후 ‘완료’ 버튼 누르면 이 프로시저가 호출됨
 
 ---
 
