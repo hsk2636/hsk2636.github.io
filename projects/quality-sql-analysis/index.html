@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>통합 품질 정보 SQL 분석 | quality-sql-analysis</title>
+
+    <!-- 메인 스타일 재사용 -->
+    <link rel="stylesheet" href="../../style.css?v=4">
+
+    <!-- 프로젝트 페이지 전용 살짝 추가 스타일 -->
+    <style>
+        .project-page {
+            max-width: 900px;
+        }
+
+        .project-container {
+            margin-top: 24px;
+            margin-bottom: 40px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #eef2ff;
+            color: #3730a3;
+            border: 1px solid #c7d2fe;
+            margin-right: 6px;
+        }
+
+        .code-block {
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        .section-title-sub {
+            font-size: 15px;
+            font-weight: 700;
+            margin: 18px 0 8px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 13px;
+            text-decoration: none;
+            color: #4f46e5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page project-page">
+
+    <!-- 상단 헤더 (메인과 톤 맞춤) -->
+    <header class="header">
+        <h1>통합 품질 정보 SQL 분석</h1>
+        <h3>quality-sql-analysis</h3>
+        <p>
+            LOT별/버전별 품질 데이터를 Oracle SQL로 집계하고,  
+            TOTAL ROW 생성 패턴까지 정리한 품질 지표 분석 프로젝트입니다.
+        </p>
+        <div style="margin-top:14px;">
+            <span class="badge">Oracle SQL</span>
+            <span class="badge">PL/SQL</span>
+            <span class="badge">Manufacturing IT</span>
+        </div>
+    </header>
+
+    <main class="project-container">
+
+        <!-- 개요 -->
+        <section>
+            <h2 class="section-title">프로젝트 개요</h2>
+            <p class="text-body">
+                이 프로젝트는 제조 품질 시스템의 데이터를 대상으로  
+                <b>GOOD/BAD/M2 집계</b>, <b>버전(REV)별 품질 현황</b>,  
+                <b>월별 품질 현황 + TOTAL ROW 생성</b> 패턴을 정리한 SQL 모음입니다.
+            </p>
+        </section>
+
+        <!-- 파일 구성 -->
+        <section>
+            <h2 class="section-title">파일 구성</h2>
+            <div class="code-block">
+<pre><code>quality-sql-analysis/
+ ├─ 01_quality_summary.sql     -- 기본 품질 집계 쿼리
+ ├─ 02_quality_version.sql     -- 버전(REV)별 GOOD/BAD 집계
+ ├─ 03_quality_total_row.sql   -- TOTAL ROW 생성용 SQL 패턴
+ ├─ 04_monthly_quality.sql     -- 월별 품질 현황 집계
+ └─ README.md                  -- 프로젝트 소개 문서
+</code></pre>
+            </div>
+        </section>
+
+        <!-- 핵심 SQL 패턴 -->
+        <section>
+            <h2 class="section-title">핵심 SQL 패턴 예시</h2>
+
+            <div class="section-title-sub">1) LOT/버전별 기본 품질 집계</div>
+            <div class="code-block">
+<pre><code>SELECT
+    lot_no,
+    rev_no,
+    SUM(good_qty) AS good_qty,
+    SUM(bad_qty)  AS bad_qty,
+    ROUND(
+        CASE 
+            WHEN (SUM(good_qty) + SUM(bad_qty)) = 0 THEN 0
+            ELSE SUM(bad_qty) / (SUM(good_qty) + SUM(bad_qty)) * 100
+        END,
+        2
+    ) AS defect_rate
+FROM tb_quality_result
+GROUP BY lot_no, rev_no
+ORDER BY lot_no, rev_no;
+</code></pre>
+            </div>
+
+            <div class="section-title-sub">2) ROLLUP + TOTAL ROW 생성</div>
+            <div class="code-block">
+<pre><code>SELECT
+    CASE
+        WHEN GROUPING(order_month) = 1 THEN 'TOTAL'
+        ELSE order_month
+    END AS order_month,
+    SUM(defect_qty) AS total_defect_qty
+FROM tb_monthly_quality
+GROUP BY ROLLUP (order_month)
+ORDER BY
+    CASE
+        WHEN order_month = 'TOTAL' THEN 9999
+        ELSE TO_NUMBER(order_month)
+    END;
+</code></pre>
+            </div>
+
+            <p class="text-body">
+                위 패턴은 월별 집계를 하면서 마지막 행에 <b>TOTAL</b>을 추가해야 하는  
+                리포트·대시보드에서 그대로 재사용할 수 있는 구조입니다.
+            </p>
+        </section>
+
+        <!-- 활용 포인트 -->
+        <section>
+            <h2 class="section-title">활용 포인트</h2>
+            <ul class="text-body">
+                <li>NVL / DECODE / ROLLUP / GROUPING 을 조합한 품질 리포트 SQL 패턴</li>
+                <li>LOT·REV 기준의 상세 집계와 월 단위 집계를 동시에 다루는 예제</li>
+                <li>향후 PL/SQL 프로시저 안에서 재사용 가능한 집계 쿼리 구조</li>
+            </ul>
+        </section>
+
+        <!-- GitHub / 뒤로가기 -->
+        <section>
+            <h2 class="section-title">GitHub 레포지토리</h2>
+            <p class="text-body">
+                실제 SQL 파일은 아래 GitHub 저장소에 정리되어 있습니다.
+            </p>
+            <p class="text-body">
+                <a href="https://github.com/hsk2636/quality-sql-analysis"
+                   class="project-link project-link-github"
+                   target="_blank" rel="noopener noreferrer">
+                    GitHub에서 보기
+                </a>
+            </p>
+
+            <a href="../../index.html" class="back-link">← 메인 포트폴리오로 돌아가기</a>
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
