@@ -22,6 +22,7 @@ Oracle SQL을 활용하여 **LOT별 / 버전별 품질 데이터(GOOD / BAD / M2
 
 ## 📂 파일 구성
 
+```
 quality-sql-analysis/
 │
 ├── 01_quality_summary.sql # 기본 품질 집계 쿼리
@@ -29,7 +30,7 @@ quality-sql-analysis/
 ├── 03_quality_total_row.sql # TOTAL ROW 생성용 SQL 패턴
 ├── 04_monthly_quality.sql # 월별 품질 현황 집계
 └── README.md # 프로젝트 소개 문서
-
+```
 
 ---
 
