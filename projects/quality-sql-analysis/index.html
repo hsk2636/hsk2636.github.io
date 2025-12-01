@@ -91,68 +91,95 @@
         <!-- 파일 구성 -->
         <section>
             <h2 class="section-title">파일 구성</h2>
+            <div class="code-block">
+<pre><code>quality-sql-analysis/
+ ├─ 01_quality_summary.sql     -- 기본 품질 집계 쿼리
+ ├─ 02_quality_version.sql     -- 버전(REV)별 GOOD/BAD 집계
+ ├─ 03_quality_total_row.sql   -- TOTAL ROW 생성용 SQL 패턴
+ ├─ 04_monthly_quality.sql     -- 월별 품질 현황 집계
+ └─ README.md                  -- 프로젝트 소개 문서
+</code></pre>
+            </div>
+        </section>
 
-```text
-quality-sql-analysis/
- ├─ 01_quality_summary.sql     # 기본 품질 집계 쿼리
- ├─ 02_quality_version.sql     # 버전(REV)별 GOOD/BAD 집계
- ├─ 03_quality_total_row.sql   # TOTAL ROW 생성용 SQL 패턴
- ├─ 04_monthly_quality.sql     # 월별 품질 현황 집계
- └─ README.md                  # 프로젝트 소개 문서
-```
+        <!-- 핵심 SQL 패턴 -->
+        <section>
+            <h2 class="section-title">핵심 SQL 패턴 예시</h2>
 
-    </section>
+            <div class="section-title-sub">1) LOT/버전별 기본 품질 집계</div>
+            <div class="code-block">
+<pre><code>SELECT
+    lot_no,
+    rev_no,
+    SUM(good_qty) AS good_qty,
+    SUM(bad_qty)  AS bad_qty,
+    ROUND(
+        CASE 
+            WHEN (SUM(good_qty) + SUM(bad_qty)) = 0 THEN 0
+            ELSE SUM(bad_qty) / (SUM(good_qty) + SUM(bad_qty)) * 100
+        END,
+        2
+    ) AS defect_rate
+FROM tb_quality_result
+GROUP BY lot_no, rev_no
+ORDER BY lot_no, rev_no;
+</code></pre>
+            </div>
 
-    <!-- 핵심 SQL 패턴 -->
-    <section>
-        <h2 class="section-title">핵심 SQL 패턴 예시</h2>
+            <div class="section-title-sub">2) ROLLUP + TOTAL ROW 생성</div>
+            <div class="code-block">
+<pre><code>SELECT
+    CASE
+        WHEN GROUPING(order_month) = 1 THEN 'TOTAL'
+        ELSE order_month
+    END AS order_month,
+    SUM(defect_qty) AS total_defect_qty
+FROM tb_monthly_quality
+GROUP BY ROLLUP (order_month)
+ORDER BY
+    CASE
+        WHEN order_month = 'TOTAL' THEN 9999
+        ELSE TO_NUMBER(order_month)
+    END;
+</code></pre>
+            </div>
 
-        <div class="section-title-sub">1) LOT/버전별 기본 품질 집계</div>
-        <div class="code-block">
+            <p class="text-body">
+                위 패턴은 월별 집계를 하면서 마지막 행에 <b>TOTAL</b>을 추가해야 하는  
+                리포트·대시보드에서 그대로 재사용할 수 있는 구조입니다.
+            </p>
+        </section>
 
-<pre><code>SELECT lot_no, rev_no, SUM(good_qty) AS good_qty, SUM(bad_qty) AS bad_qty, ROUND( CASE WHEN (good_qty + bad_qty) = 0 THEN 0 ELSE bad_qty / (good_qty + bad_qty) * 100 END, 2 ) AS defect_rate FROM tb_quality_result GROUP BY lot_no, rev_no ORDER BY lot_no, rev_no; </code></pre>
+        <!-- 활용 포인트 -->
+        <section>
+            <h2 class="section-title">활용 포인트</h2>
+            <ul class="text-body">
+                <li>NVL / DECODE / ROLLUP / GROUPING 을 조합한 품질 리포트 SQL 패턴</li>
+                <li>LOT·REV 기준의 상세 집계와 월 단위 집계를 동시에 다루는 예제</li>
+                <li>향후 PL/SQL 프로시저 안에서 재사용 가능한 집계 쿼리 구조</li>
+            </ul>
+        </section>
 
-                  </div>
+        <!-- GitHub / 뒤로가기 -->
+        <section>
+            <h2 class="section-title">GitHub 레포지토리</h2>
+            <p class="text-body">
+                실제 SQL 파일은 아래 GitHub 저장소에 정리되어 있습니다.
+            </p>
+            <p class="text-body">
+                <a href="https://github.com/hsk2636/quality-sql-analysis"
+                   class="project-link project-link-github"
+                   target="_blank" rel="noopener noreferrer">
+                    GitHub에서 보기
+                </a>
+            </p>
 
-        <div class="section-title-sub">2) ROLLUP + TOTAL ROW 생성</div>
-        <div class="code-block">
+            <a href="../../index.html" class="back-link">← 메인 포트폴리오로 돌아가기</a>
+        </section>
 
-<pre><code>SELECT CASE WHEN GROUPING(order_month) = 1 THEN 'TOTAL' ELSE order_month END AS order_month, SUM(defect_qty) AS total_defect_qty FROM tb_monthly_quality GROUP BY ROLLUP (order_month) ORDER BY CASE WHEN order_month = 'TOTAL' THEN 9999 ELSE TO_NUMBER(order_month) END; </code></pre>
+    </main>
 
-                  </div>
+</div>
 
-        <p class="text-body">
-            위 패턴은 월별 집계를 하면서 마지막 행에 <b>TOTAL</b>을 추가해야 하는  
-            리포트·대시보드에서 그대로 재사용할 수 있는 구조입니다.
-        </p>
-    </section>
-
-    <!-- 활용 포인트 -->
-    <section>
-        <h2 class="section-title">활용 포인트</h2>
-        <ul class="text-body">
-            <li>NVL / DECODE / ROLLUP / GROUPING 을 조합한 품질 리포트 SQL 패턴</li>
-            <li>LOT·REV 기준의 상세 집계와 월 단위 집계를 동시에 다루는 예제</li>
-            <li>향후 PL/SQL 프로시저 안에서 재사용 가능한 집계 쿼리 구조</li>
-        </ul>
-    </section>
-
-    <!-- GitHub / 뒤로가기 -->
-    <section>
-        <h2 class="section-title">GitHub 레포지토리</h2>
-        <p class="text-body">
-            실제 SQL 파일은 아래 GitHub 저장소에 정리되어 있습니다.
-        </p>
-        <p class="text-body">
-            <a href="https://github.com/hsk2636/quality-sql-analysis"
-               class="project-link project-link-github"
-               target="_blank" rel="noopener noreferrer">
-                GitHub에서 보기
-            </a>
-        </p>
-
-        <a href="../../index.html" class="back-link">← 메인 포트폴리오로 돌아가기</a>
-    </section>
-
-</main>
-
+</body>
+</html>
