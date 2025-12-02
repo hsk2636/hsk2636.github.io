@@ -163,84 +163,91 @@
 
                 </section>
 
-                <!-- PROJECTS -->
-                <section>
-                    <h2 class="section-title">Projects</h2>
+        <!-- PROJECTS -->
+        <section>
+            <h2 class="section-title">Projects</h2>
 
-                    <!-- Project 1 -->
-                    <article class="project-card">
-                        <div class="project-header">
-                            <div>
-                                <div class="project-title">통합 품질 정보 SQL 분석</div>
-                                <div class="project-tech">Oracle SQL, PL-SQL</div>
-                            </div>
-                            <div class="project-links">
-                                <!-- 1) 사이트 내부 상세 페이지 -->
-                                <a href="projects/quality-sql-analysis/" class="project-link">
-                                    상세 보기
-                                </a>
-                                <!-- 2) GitHub 레포 (새 탭) -->
-                                <a href="https://github.com/hsk2636/quality-sql-analysis"
-                                   class="project-link project-link-github"
-                                   target="_blank" rel="noopener noreferrer">
-                                    GitHub
-                                </a>
-                            </div>
-                        </div>
-                        <p class="text-body">
-                            LOT별/버전별 GOOD/BAD/M2 데이터와 불량률을 계산하는 집계 쿼리 분석.  
-                            NVL 및 DECODE를 이용해 합계 행(TOTAL ROW)을 표현하는 로직을 정리하고,
-                            품질 지표 계산 흐름을 문서화.
-                        </p>
-                    </article>
+            <!-- Project 1 : 통합 품질 정보 SQL 분석 -->
+            <article class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">통합 품질 정보 SQL 분석</div>
+                        <div class="project-tech">Oracle SQL, PL-SQL</div>
+                    </div>
+                </div>
 
-                    <!-- Project 2 -->
-                    <article class="project-card">
-                        <div class="project-header">
-                            <div>
-                                <div class="project-title">PDA 출고/입고/재입고 프로시저 분석</div>
-                                <div class="project-tech">Oracle PL-SQL, PDA(Android)</div>
-                            </div>
-                            <div class="project-links">
-                                <!-- 상세 페이지는 나중에 만들면 여기 링크만 교체 -->
-                                <a href="https://github.com/hsk2636/pda-procedure-analysis"
-                                   class="project-link project-link-github"
-                                   target="_blank" rel="noopener noreferrer">
-                                    GitHub
-                                </a>
-                            </div>
-                        </div>
-                        <p class="text-body">
-                            현장의 PDA 스캔 흐름과 DB 반영 로직을 분석하여  
-                            출고 유형(ETC/MOV/SAL) 및 재입고, ERP 인터페이스 처리 순서를 단계별로 문서화.
-                        </p>
-                    </article>
+                <p class="text-body">
+                    LOT별/버전별 GOOD/BAD/M2 데이터의 불량률을 계산하는 집계 쿼리 분석.  
+                    NVL 및 DECODE를 이용해 합계 행(TOTAL ROW)을 표현하는 로직을 정리하고,
+                    품질 지표 계산 흐름을 문서화한 프로젝트입니다.
+                </p>
 
-                    <!-- Project 3 -->
-                    <article class="project-card">
-                        <div class="project-header">
-                            <div>
-                                <div class="project-title">Data Preprocessing 실습 노트</div>
-                                <div class="project-tech">Python, Pandas, SMOTE</div>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/hsk2636/data-preprocessing-notes"
-                                   class="project-link project-link-github"
-                                   target="_blank" rel="noopener noreferrer">
-                                    GitHub
-                                </a>
-                            </div>
-                        </div>
-                        <p class="text-body">
-                            결측치 처리(fillna), Label Encoding/One-Hot Encoding,  
-                            SMOTE 기반 불균형 데이터 처리 실습을 진행하고, 각 방법의 특징과 주의점을 노트로 정리.
-                        </p>
-                    </article>
+                <div class="project-actions">
+                    <a href="projects/quality-sql-analysis/" class="btn-chip">
+                        🔎 상세 보기
+                    </a>
+                    <a href="https://github.com/hsk2636/quality-sql-analysis"
+                       class="btn-chip-outline"
+                       target="_blank" rel="noopener noreferrer">
+                        GitHub
+                    </a>
+                </div>
+            </article>
 
-                </section>
+            <!-- Project 2 : PDA 출고/입고/재입고 프로시저 분석 -->
+            <article class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">PDA 출고/입고/재입고 프로시저 분석</div>
+                        <div class="project-tech">Oracle PL-SQL, PDA(Android)</div>
+                    </div>
+                </div>
 
-            </section>
-        </main>
+                <p class="text-body">
+                    현장 PDA 스캔 흐름과 DB 반영 프로시저를 분석하여  
+                    출고 유형(ETC/MOV/SAL), 재입고, ERP 인터페이스 처리 순서를 단계별로 정리한 프로젝트입니다.
+                </p>
+
+                <div class="project-actions">
+                    <a href="projects/pda-procedure-analysis/" class="btn-chip">
+                        🔎 상세 보기
+                    </a>
+                    <a href="https://github.com/hsk2636/pda-procedure-analysis"
+                       class="btn-chip-outline"
+                       target="_blank" rel="noopener noreferrer">
+                        GitHub
+                    </a>
+                </div>
+            </article>
+
+            <!-- Project 3 : Data Preprocessing 실습 노트 -->
+            <article class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Data Preprocessing 실습 노트</div>
+                        <div class="project-tech">Python, Pandas, SMOTE</div>
+                    </div>
+                </div>
+
+                <p class="text-body">
+                    결측치 처리(fillna), Label Encoding/One-Hot Encoding,  
+                    SMOTE 기반 불균형 데이터 처리 실습을 진행하고,
+                    각 방법의 특징과 주의점을 노트로 정리한 프로젝트입니다.
+                </p>
+
+                <div class="project-actions">
+                    <a href="projects/data-preprocessing-notes/" class="btn-chip">
+                        🔎 상세 보기
+                    </a>
+                    <a href="https://github.com/hsk2636/data-preprocessing-notes"
+                       class="btn-chip-outline"
+                       target="_blank" rel="noopener noreferrer">
+                        GitHub
+                    </a>
+                </div>
+            </article>
+
+        </section>
 
         <!-- 🔗 SQL / PL-SQL 포트폴리오 바로가기 버튼 영역 -->
         <div class="portfolio-links">
