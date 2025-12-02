@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Preprocessing 실습 노트 | data-preprocessing-notes</title>
+
+    <!-- 메인 스타일 재사용 -->
+    <link rel="stylesheet" href="../../style.css?v=4">
+
+    <!-- 프로젝트 전용 추가 스타일 -->
+    <style>
+        .project-page {
+            max-width: 900px;
+        }
+
+        .project-container {
+            margin-top: 24px;
+            margin-bottom: 40px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #eef2ff;
+            color: #3730a3;
+            border: 1px solid #c7d2fe;
+            margin-right: 6px;
+        }
+
+        .code-block {
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        .section-title-sub {
+            font-size: 15px;
+            font-weight: 700;
+            margin: 18px 0 8px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 13px;
+            text-decoration: none;
+            color: #4f46e5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page project-page">
+
+    <!-- 상단 헤더 -->
+    <header class="header">
+        <h1>Data Preprocessing 실습 노트</h1>
+        <h3>data-preprocessing-notes</h3>
+        <p>
+            Python (Pandas)를 활용한 결측치 처리, 인코딩, 스케일링,  
+            SMOTE 기반 불균형 데이터 처리 과정을 실습 위주로 정리한 프로젝트입니다.
+        </p>
+        <div style="margin-top:14px;">
+            <span class="badge">Python</span>
+            <span class="badge">Pandas</span>
+            <span class="badge">SMOTE</span>
+        </div>
+    </header>
+
+    <main class="project-container">
+
+        <!-- 1. 개요 -->
+        <section>
+            <h2 class="section-title">프로젝트 개요</h2>
+            <p class="text-body">
+                이 프로젝트는 머신러닝 이전 단계인 <b>Data Preprocessing</b> 실습 내용을  
+                Jupyter Notebook 기준으로 정리한 노트입니다.
+                <br><br>
+                특히 <b>결측치 처리</b>, <b>범주형 인코딩</b>, <b>스케일링</b>, <b>SMOTE를 활용한 클래스 불균형 처리</b>를  
+                한 번에 연결해서 연습할 수 있도록 구성했습니다.
+            </p>
+        </section>
+
+        <!-- 2. 파일 구성 -->
+        <section>
+            <h2 class="section-title">파일 구성</h2>
+
+            <div class="code-block">
+<pre>data-preprocessing-notes/
+ ├─ 01_missing_values.ipynb      -- 결측치 탐색 및 처리 (drop / fillna)
+ ├─ 02_encoding_scaling.ipynb    -- Label Encoding / One-Hot Encoding / Scaling
+ ├─ 03_smote_imbalance.ipynb     -- SMOTE를 활용한 불균형 데이터 처리
+ └─ README.md                    -- 전체 실습 개요 및 실행 방법</pre>
+            </div>
+        </section>
+
+        <!-- 3. 핵심 코드 스니펫 -->
+        <section>
+            <h2 class="section-title">핵심 코드 예시</h2>
+
+            <div class="section-title-sub">1) 결측치 처리 (Missing Values)</div>
+            <div class="code-block">
+<pre><code>import pandas as pd
+
+df = pd.read_csv("data.csv")
+
+# 1) 결측치 개수 확인
+print(df.isnull().sum())
+
+# 2) 수치형 컬럼은 평균으로 채우기
+num_cols = ["age", "salary"]
+df[num_cols] = df[num_cols].fillna(df[num_cols].mean())
+
+# 3) 범주형 컬럼은 최빈값으로 채우기
+cat_cols = ["gender", "city"]
+for col in cat_cols:
+    df[col] = df[col].fillna(df[col].mode()[0])</code></pre>
+            </div>
+
+            <div class="section-title-sub">2) 인코딩 + 스케일링</div>
+            <div class="code-block">
+<pre><code>from sklearn.preprocessing import LabelEncoder, StandardScaler
+
+# Label Encoding 예시
+le = LabelEncoder()
+df["gender_le"] = le.fit_transform(df["gender"])
+
+# One-Hot Encoding 예시
+df = pd.get_dummies(df, columns=["city"], drop_first=True)
+
+# Standard Scaling
+scaler = StandardScaler()
+df[["age", "salary"]] = scaler.fit_transform(df[["age", "salary"]])</code></pre>
+            </div>
+
+            <div class="section-title-sub">3) SMOTE로 클래스 불균형 처리</div>
+            <div class="code-block">
+<pre><code>from imblearn.over_sampling import SMOTE
+
+X = df.drop("target", axis=1)
+y = df["target"]
+
+smote = SMOTE(random_state=42)
+X_resampled, y_resampled = smote.fit_resample(X, y)
+
+print("원본 데이터:", y.value_counts())
+print("SMOTE 후:", y_resampled.value_counts())</code></pre>
+            </div>
+
+            <p class="text-body">
+                위 코드는 실제 노트북에서 단계별로 실행하면서,  
+                <b>전처리 전/후의 데이터 분포 변화</b>를 비교해 볼 수 있도록 구성되어 있습니다.
+            </p>
+        </section>
+
+        <!-- 4. 활용 포인트 -->
+        <section>
+            <h2 class="section-title">활용 포인트</h2>
+            <ul class="text-body">
+                <li>실제 CSV 데이터를 불러와 <b>EDA → 전처리 → 모델링</b>까지 이어지는 워크플로우의 전처리 파트 연습</li>
+                <li>Encoding / Scaling / SMOTE의 <b>적용 순서</b>와 <b>주의점</b>을 정리</li>
+                <li>향후 Oracle SQL / PL/SQL로 가져오기 전, Python(Pandas)에서 <b>사전 정제</b>하는 용도로 활용 가능</li>
+            </ul>
+        </section>
+
+        <!-- 5. GitHub / 뒤로가기 -->
+        <section>
+            <h2 class="section-title">GitHub 레포지토리</h2>
+            <p class="text-body">
+                Jupyter Notebook 파일과 추가 설명은 아래 GitHub 저장소에 있습니다.
+            </p>
+            <p class="text-body">
+                <a href="https://github.com/hsk2636/data-preprocessing-notes"
+                   class="project-link project-link-github"
+                   target="_blank" rel="noopener noreferrer">
+                    GitHub에서 보기
+                </a>
+            </p>
+
+            <a href="../../index.html" class="back-link">← 메인 포트폴리오로 돌아가기</a>
+        </section>
+
+    </main>
+</div>
+
+</body>
+</html>
