@@ -8,7 +8,7 @@
     <!-- 메인 스타일 재사용 -->
     <link rel="stylesheet" href="../../style.css?v=4">
 
-    <!-- 프로젝트 전용 추가 스타일 -->
+    <!-- 프로젝트 페이지 전용 스타일 -->
     <style>
         .project-page {
             max-width: 900px;
@@ -36,7 +36,8 @@
             color: #e5e7eb;
             padding: 14px 16px;
             border-radius: 10px;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                         "Liberation Mono", "Courier New", monospace;
             font-size: 13px;
             overflow-x: auto;
             margin-bottom: 16px;
@@ -66,117 +67,135 @@
         <h1>Data Preprocessing 실습 노트</h1>
         <h3>data-preprocessing-notes</h3>
         <p>
-            Python (Pandas)를 활용한 결측치 처리, 인코딩, 스케일링,  
-            SMOTE 기반 불균형 데이터 처리 과정을 실습 위주로 정리한 프로젝트입니다.
+            Python(Pandas)을 이용한 결측치 처리, 인코딩(Encoding), 스케일링(Scaling),<br>
+            SMOTE를 활용한 불균형 데이터(imbalanced data) 처리 과정을 정리한 실습 노트입니다.
         </p>
         <div style="margin-top:14px;">
             <span class="badge">Python</span>
             <span class="badge">Pandas</span>
+            <span class="badge">Scikit-learn</span>
             <span class="badge">SMOTE</span>
         </div>
     </header>
 
     <main class="project-container">
 
-        <!-- 1. 개요 -->
+        <!-- 개요 -->
         <section>
             <h2 class="section-title">프로젝트 개요</h2>
             <p class="text-body">
-                이 프로젝트는 머신러닝 이전 단계인 <b>Data Preprocessing</b> 실습 내용을  
-                Jupyter Notebook 기준으로 정리한 노트입니다.
-                <br><br>
-                특히 <b>결측치 처리</b>, <b>범주형 인코딩</b>, <b>스케일링</b>, <b>SMOTE를 활용한 클래스 불균형 처리</b>를  
-                한 번에 연결해서 연습할 수 있도록 구성했습니다.
+                이 프로젝트는 머신러닝 모델링 이전 단계인 <b>데이터 전처리(Data Preprocessing)</b>에 집중합니다.<br>
+                Kaggle 예제와 제조 데이터 구조를 참고하여, <b>결측치 · 범주형 변수 · 불균형 라벨</b>을
+                어떻게 처리하는지 <b>Jupyter Notebook</b> 형태로 정리했습니다.
             </p>
         </section>
 
-        <!-- 2. 파일 구성 -->
+        <!-- 파일 구성 -->
         <section>
             <h2 class="section-title">파일 구성</h2>
 
             <div class="code-block">
-<pre>data-preprocessing-notes/
- ├─ 01_missing_values.ipynb      -- 결측치 탐색 및 처리 (drop / fillna)
- ├─ 02_encoding_scaling.ipynb    -- Label Encoding / One-Hot Encoding / Scaling
- ├─ 03_smote_imbalance.ipynb     -- SMOTE를 활용한 불균형 데이터 처리
- └─ README.md                    -- 전체 실습 개요 및 실행 방법</pre>
+<pre><code>data-preprocessing-notes/
+ ├─ 01_missing_values.ipynb      -- 결측치(Missing Values) 처리 실습
+ ├─ 02_encoding_scaling.ipynb    -- 범주형 인코딩 + 스케일링 실습
+ ├─ 03_smote_class_imbalance.ipynb -- 불균형 데이터(SMOTE) 처리 실습
+ ├─ 04_full_pipeline.ipynb       -- 전처리 + 모델링 전체 파이프라인 예제
+ └─ README.md                    -- 각 노트 설명 및 실행 방법</code></pre>
             </div>
         </section>
 
-        <!-- 3. 핵심 코드 스니펫 -->
+        <!-- 핵심 코드 예시 1 -->
         <section>
             <h2 class="section-title">핵심 코드 예시</h2>
 
-            <div class="section-title-sub">1) 결측치 처리 (Missing Values)</div>
+            <div class="section-title-sub">1) 결측치 처리 + 인코딩 + 스케일링 파이프라인</div>
             <div class="code-block">
 <pre><code>import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
 
+# 1) 데이터 로드
 df = pd.read_csv("data.csv")
 
-# 1) 결측치 개수 확인
-print(df.isnull().sum())
-
-# 2) 수치형 컬럼은 평균으로 채우기
-num_cols = ["age", "salary"]
-df[num_cols] = df[num_cols].fillna(df[num_cols].mean())
-
-# 3) 범주형 컬럼은 최빈값으로 채우기
-cat_cols = ["gender", "city"]
-for col in cat_cols:
-    df[col] = df[col].fillna(df[col].mode()[0])</code></pre>
-            </div>
-
-            <div class="section-title-sub">2) 인코딩 + 스케일링</div>
-            <div class="code-block">
-<pre><code>from sklearn.preprocessing import LabelEncoder, StandardScaler
-
-# Label Encoding 예시
-le = LabelEncoder()
-df["gender_le"] = le.fit_transform(df["gender"])
-
-# One-Hot Encoding 예시
-df = pd.get_dummies(df, columns=["city"], drop_first=True)
-
-# Standard Scaling
-scaler = StandardScaler()
-df[["age", "salary"]] = scaler.fit_transform(df[["age", "salary"]])</code></pre>
-            </div>
-
-            <div class="section-title-sub">3) SMOTE로 클래스 불균형 처리</div>
-            <div class="code-block">
-<pre><code>from imblearn.over_sampling import SMOTE
+# 2) 결측치 처리 (간단 예시)
+df["age"] = df["age"].fillna(df["age"].median())
+df["job"] = df["job"].fillna("unknown")
 
 X = df.drop("target", axis=1)
 y = df["target"]
 
-smote = SMOTE(random_state=42)
-X_resampled, y_resampled = smote.fit_resample(X, y)
+num_cols = ["age", "balance"]
+cat_cols = ["job", "marital"]
 
-print("원본 데이터:", y.value_counts())
-print("SMOTE 후:", y_resampled.value_counts())</code></pre>
+# 3) 컬럼별 전처리 정의
+numeric_transformer = Pipeline(steps=[
+    ("scaler", StandardScaler())
+])
+
+categorical_transformer = Pipeline(steps=[
+    ("onehot", OneHotEncoder(handle_unknown="ignore"))
+])
+
+preprocess = ColumnTransformer(
+    transformers=[
+        ("num", numeric_transformer, num_cols),
+        ("cat", categorical_transformer, cat_cols),
+    ]
+)
+
+# 4) 전처리 + 모델 파이프라인
+clf = Pipeline(steps=[
+    ("preprocess", preprocess),
+    ("model", LogisticRegression(max_iter=1000))
+])
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+clf.fit(X_train, y_train)
+print("Accuracy:", clf.score(X_test, y_test))</code></pre>
             </div>
 
-            <p class="text-body">
-                위 코드는 실제 노트북에서 단계별로 실행하면서,  
-                <b>전처리 전/후의 데이터 분포 변화</b>를 비교해 볼 수 있도록 구성되어 있습니다.
-            </p>
+        <!-- 핵심 코드 예시 2 -->
+        <div class="section-title-sub">2) SMOTE로 불균형 데이터 보정</div>
+        <div class="code-block">
+<pre><code>from imblearn.over_sampling import SMOTE
+from collections import Counter
+
+print("Before SMOTE:", Counter(y_train))
+
+sm = SMOTE(random_state=42)
+X_resampled, y_resampled = sm.fit_resample(X_train, y_train)
+
+print("After  SMOTE:", Counter(y_resampled))</code></pre>
+        </div>
+
+        <p class="text-body">
+            이렇게 전처리 단계를 <b>파이프라인(Pipeline)</b>으로 묶어두면,<br>
+            나중에 모델을 교체하거나, 다른 데이터셋에 그대로 재사용하기가 매우 편해집니다.
+        </p>
         </section>
 
-        <!-- 4. 활용 포인트 -->
+        <!-- 활용 포인트 -->
         <section>
             <h2 class="section-title">활용 포인트</h2>
             <ul class="text-body">
-                <li>실제 CSV 데이터를 불러와 <b>EDA → 전처리 → 모델링</b>까지 이어지는 워크플로우의 전처리 파트 연습</li>
-                <li>Encoding / Scaling / SMOTE의 <b>적용 순서</b>와 <b>주의점</b>을 정리</li>
-                <li>향후 Oracle SQL / PL/SQL로 가져오기 전, Python(Pandas)에서 <b>사전 정제</b>하는 용도로 활용 가능</li>
+                <li>실제 데이터셋을 기반으로 한 <b>결측치 처리 전략 비교</b> (평균, 중앙값, 최빈값 등)</li>
+                <li>범주형 변수 인코딩(One-Hot Encoding)과 스케일링(Scaling) 조합 연습</li>
+                <li>불균형 데이터셋에서 <b>SMOTE</b> 적용 전/후 분포 비교</li>
+                <li>전처리 + 모델 학습을 하나의 <b>Pipeline</b>으로 관리하는 방법 정리</li>
             </ul>
         </section>
 
-        <!-- 5. GitHub / 뒤로가기 -->
+        <!-- GitHub / 뒤로가기 -->
         <section>
             <h2 class="section-title">GitHub 레포지토리</h2>
             <p class="text-body">
-                Jupyter Notebook 파일과 추가 설명은 아래 GitHub 저장소에 있습니다.
+                Jupyter Notebook 파일은 아래 GitHub 저장소에 정리되어 있습니다.
             </p>
             <p class="text-body">
                 <a href="https://github.com/hsk2636/data-preprocessing-notes"
