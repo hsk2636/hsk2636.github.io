@@ -210,13 +210,12 @@ body {
     opacity: 0.7;
 }
 
-/* 링크 버튼 묶음 */
+/* 혹시 다른 곳에서 쓸 링크 버튼(예전 스타일) */
 .project-links {
     display: flex;
     gap: 6px;
 }
 
-/* 프로젝트 링크 버튼 스타일 */
 .project-link {
     display: inline-block;
     padding: 5px 10px;
@@ -231,7 +230,6 @@ body {
     transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-/* GitHub 전용 색상 */
 .project-link-github {
     background: #111827;
     color: #e5e7eb;
@@ -466,7 +464,7 @@ body {
 .project-actions {
     margin-top: 12px;
     display: flex;
-    gap: 8px;
+    gap: 10px;
     justify-content: flex-end;
     flex-wrap: wrap;
 }
@@ -474,40 +472,40 @@ body {
 .btn-chip,
 .btn-chip-outline {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 6px 14px;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
+    cursor: pointer;
     text-decoration: none;
-    transition: background 0.15s ease, color 0.15s ease,
-                box-shadow 0.15s ease, transform 0.12s ease;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    white-space: nowrap;
 }
 
-/* 메인(채운) 버튼 */
+/* 상세 보기 버튼: 보라색 계열 */
 .btn-chip {
-    background: #4f46e5;
-    color: #ffffff;
-    border: 1px solid #4f46e5;
-}
-
-.btn-chip:hover {
-    background: #4338ca;
-    border-color: #4338ca;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(79,70,229,0.45);
-}
-
-/* 아웃라인 버튼 */
-.btn-chip-outline {
-    background: transparent;
-    color: #4f46e5;
+    background: #eef2ff;
+    color: #3730a3;
     border: 1px solid #c7d2fe;
 }
 
-.btn-chip-outline:hover {
-    background: #eef2ff;
+.btn-chip:hover {
+    background: #e0e7ff;
     transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(129,140,248,0.35);
+    box-shadow: 0 4px 10px rgba(129, 140, 248, 0.35);
+}
+
+/* GitHub 버튼: 짙은 다크 톤 */
+.btn-chip-outline {
+    background: #111827;
+    color: #e5e7eb;
+    border: 1px solid #1f2937;
+}
+
+.btn-chip-outline:hover {
+    background: #0b1120;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.6);
 }
 
 /* 모바일에서는 왼쪽 정렬 */
@@ -578,14 +576,20 @@ body {
         background: #374151;
     }
 
+    /* 상세 보기 / GitHub 버튼 다크 모드 보정 */
     .btn-chip {
-        background: #6366f1;
-        border-color: #6366f1;
+        background: #1e1b4b;
+        color: #e0e7ff;
+        border-color: #3730a3;
+    }
+
+    .btn-chip:hover {
+        background: #312e81;
     }
 
     .btn-chip-outline {
-        background: transparent;
-        color: #a5b4fc;
+        background: #0b1120;
+        color: #e5e7eb;
         border-color: #4b5563;
     }
 
