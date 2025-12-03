@@ -469,43 +469,53 @@ body {
     flex-wrap: wrap;
 }
 
-.btn-chip,
-.btn-chip-outline {
-    display: inline-block;
-    padding: 6px 14px;
+/* 🔎 상세 보기 버튼 (NEW) */
+.btn-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
     border-radius: 999px;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
-    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
     white-space: nowrap;
-}
-
-/* 상세 보기 버튼: 보라색 계열 */
-.btn-chip {
     background: #eef2ff;
     color: #3730a3;
     border: 1px solid #c7d2fe;
+    transition: all 0.25s ease;
 }
 
 .btn-chip:hover {
     background: #e0e7ff;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(129, 140, 248, 0.35);
+    border-color: #a5b4fc;
+    color: #3730a3;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 18px rgba(129,140,248,0.35);
 }
 
-/* GitHub 버튼: 짙은 다크 톤 */
+/* GitHub 버튼 */
 .btn-chip-outline {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
     background: #111827;
     color: #e5e7eb;
     border: 1px solid #1f2937;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn-chip-outline:hover {
     background: #0b1120;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(15,23,42,0.6);
 }
 
 /* 모바일에서는 왼쪽 정렬 */
