@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PDA 출고/입고/재입고 프로시저 분석 | pda-procedure-analysis</title>
 
-    <!-- 메인 스타일 재사용 -->
-    <link rel="stylesheet" href="../../style.css?v=4">
+    <!-- 메인 포트폴리오와 동일 CSS 사용 -->
+    <link rel="stylesheet" href="../../style.css?v=5" />
 
-    <!-- 프로젝트 페이지 전용 추가 스타일 -->
+    <!-- 프로젝트 상세 페이지 전용 추가 스타일 -->
     <style>
         .project-page {
             max-width: 900px;
@@ -29,7 +29,6 @@
             color: #3730a3;
             border: 1px solid #c7d2fe;
             margin-right: 6px;
-            margin-top: 4px;
         }
 
         .code-block {
@@ -38,10 +37,10 @@
             padding: 14px 16px;
             border-radius: 10px;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-                         "Liberation Mono", "Courier New", monospace;
+                "Liberation Mono", "Courier New", monospace;
             font-size: 13px;
             overflow-x: auto;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .section-title-sub {
@@ -52,10 +51,14 @@
 
         .back-link {
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 16px;
             font-size: 13px;
             text-decoration: none;
             color: #4f46e5;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -63,175 +66,227 @@
 
 <div class="page project-page">
 
-    <!-- 상단 헤더 -->
+    <!-- ===== 상단 헤더 ===== -->
     <header class="header">
         <h1>PDA 출고/입고/재입고 프로시저 분석</h1>
         <h3>pda-procedure-analysis</h3>
         <p>
-            PDA(Android) 단말에서 스캔된 출고/입고/재입고 데이터를  
-            Oracle PL/SQL 프로시저로 처리하는 흐름을 분석한 프로젝트입니다.
+            현장 PDA 스캔으로 실행되는 출고·입고·재입고 프로시저(Procedure)를 분석해서  
+            LOT 상태 변경 흐름과 ERP 인터페이스 구조를 정리한 PL/SQL 포트폴리오야.
         </p>
         <div style="margin-top:14px;">
             <span class="badge">Oracle PL/SQL</span>
-            <span class="badge">PDA (Android)</span>
-            <span class="badge">ERP Interface</span>
+            <span class="badge">PDA(Android)</span>
+            <span class="badge">Manufacturing IT</span>
         </div>
     </header>
 
+    <!-- ===== 본문 ===== -->
     <main class="project-container">
 
-        <!-- 1. 개요 -->
+        <!-- 1. 프로젝트 개요 -->
         <section>
             <h2 class="section-title">프로젝트 개요</h2>
             <p class="text-body">
-                이 프로젝트는 제조 현장에서 사용하는 PDA 단말을 기준으로  
-                <b>출고(Ship) · 입고(Receive) · 재입고(Re-Receive)</b> 프로시저 구조를 분석한 자료입니다.  
-                LOT 스캔 → 재고 검증 → 상태 변경 → 로그 기록 → ERP 인터페이스까지 이어지는  
-                전체 흐름을 PL/SQL 코드 단위로 정리했습니다.
+                이 프로젝트는 제조 현장에서 사용하는 PDA 출고·입고·재입고 기능을 담당하는 
+                <b>PL/SQL 프로시저 세트</b>를 분석한 내용이야.  
+                LOT 스캔 → 재고/상태 검증 → 이력 기록(Log) → ERP 인터페이스까지 이어지는
+                전체 흐름을 코드 관점에서 정리했어.
+            </p>
+            <p class="text-body">
+                특히 출고 유형 <b>ETC / MOV / SAL</b> 구분, 재입고(재고 되돌리기) 처리,  
+                공통 로그 패키지(Package)를 이용한 <b>로그 기록 일원화</b>가 주요 포인트야.
             </p>
         </section>
 
-        <!-- 2. 주요 프로시저 구조 -->
+        <!-- 2. 파일 구성 -->
         <section>
-            <h2 class="section-title">주요 프로시저 구조</h2>
+            <h2 class="section-title">파일 구성</h2>
 
-            <div class="section-title-sub">1) PDA 출고 등록 프로시저 (예시)</div>
-            <div class="code-block"><pre><code>PROCEDURE pr_pda_ship (
-    p_lot_no     IN  VARCHAR2,
-    p_ship_type  IN  VARCHAR2,   -- ETC / MOV / SAL ...
-    p_user_id    IN  VARCHAR2,
-    p_message    OUT VARCHAR2
+            <div class="code-block">
+<pre><code>pda-procedure-analysis/
+ ├─ 01_pda_ship_register.sql      -- PDA 출고 등록 (ETC / MOV / SAL)
+ ├─ 02_pda_ship_cancel.sql        -- PDA 출고 취소
+ ├─ 03_pda_rereceive_register.sql -- 재입고 등록
+ ├─ 04_pda_rereceive_cancel.sql   -- 재입고 취소
+ ├─ 05_pkg_pda_log.sql            -- 공통 로그 패키지 (PKG_PDA_LOG)
+ └─ README.md                     -- 프로젝트 소개 및 실행 순서</code></pre>
+            </div>
+
+            <p class="text-body">
+                각 <code>*.sql</code> 파일은 <b>실행 가능한 PL/SQL 스크립트</b> 형식으로 만들어두고,  
+                <code>README.md</code>에 실행 순서와 필요한 테스트 데이터 조건을 정리하는 방식이야.
+            </p>
+        </section>
+
+        <!-- 3. 핵심 PL/SQL 구조 예시 -->
+        <section>
+            <h2 class="section-title">핵심 PL/SQL 구조 예시</h2>
+
+            <!-- 3-1 출고 프로시저 예시 -->
+            <div class="section-title-sub">1) PDA 출고 등록 프로시저(Ship) 구조</div>
+            <div class="code-block">
+<pre><code>CREATE OR REPLACE PROCEDURE pr_pda_ship (
+      p_lot_no     IN  VARCHAR2
+    , p_ship_type  IN  VARCHAR2  -- ETC / MOV / SAL
+    , p_user_id    IN  VARCHAR2
+    , o_result     OUT VARCHAR2
 ) IS
-    v_onhand_qty   NUMBER;
+    v_err_msg   VARCHAR2(4000);
 BEGIN
-    -- 1. LOT 존재 여부 및 재고 수량 확인
-    SELECT onhand_qty
-      INTO v_onhand_qty
-      FROM tb_lot_stock
+    -- 1. LOT 존재 / 상태 검증
+    SELECT status
+      INTO v_status
+      FROM tb_lot
      WHERE lot_no = p_lot_no
        FOR UPDATE;
 
-    IF v_onhand_qty &lt;= 0 THEN
-        p_message := '재고 부족';
-        ROLLBACK;
-        RETURN;
+    IF v_status &lt;&gt; 'READY' THEN
+        v_err_msg := '출고 불가 상태 LOT 입니다.';
+        RAISE_APPLICATION_ERROR(-20001, v_err_msg);
     END IF;
 
-    -- 2. LOT 상태 변경 (출고)
-    UPDATE tb_lot_stock
-       SET status = 'SHIPPED',
-           onhand_qty = onhand_qty - 1
-     WHERE lot_no = p_lot_no;
+    -- 2. 재고 수량 검증
+    PERFORM_STOCK_CHECK(p_lot_no, p_ship_type);  -- 별도 공통 프로시저 가정
 
-    -- 3. 로그 기록
-    INSERT INTO tb_pda_log (
-        log_dt,   lot_no,   action_type,   user_id,   message
+    -- 3. 출고 이력 기록
+    INSERT INTO tb_ship_hist (
+          lot_no, ship_type, ship_dt, user_id
     ) VALUES (
-        SYSDATE, p_lot_no, 'SHIP',        p_user_id, 'PDA 출고 처리 완료'
+          p_lot_no, p_ship_type, SYSDATE, p_user_id
     );
 
+    -- 4. 재고 차감
+    UPDATE tb_inventory
+       SET qty = qty - 1
+     WHERE lot_no = p_lot_no;
+
+    -- 5. ERP 인터페이스 테이블 적재
+    INSERT INTO erp_if_ship (
+          lot_no, ship_type, if_flag, create_dt
+    ) VALUES (
+          p_lot_no, p_ship_type, 'N', SYSDATE
+    );
+
+    -- 6. 공통 로그 패키지 호출
+    pkg_pda_log.write_log(
+          p_lot_no  =&gt; p_lot_no
+        , p_action  =&gt; 'SHIP_' || p_ship_type
+        , p_message =&gt; '정상 출고 완료'
+    );
+
+    o_result := 'OK';
+
     COMMIT;
-    p_message := 'OK';
 
 EXCEPTION
     WHEN OTHERS THEN
         ROLLBACK;
-        p_message := 'ERROR : ' || SQLERRM;
-END pr_pda_ship;</code></pre></div>
+
+        v_err_msg := 'ERROR : ' || SQLERRM;
+        pkg_pda_log.write_log(
+              p_lot_no  =&gt; p_lot_no
+            , p_action  =&gt; 'SHIP_ERROR'
+            , p_message =&gt; v_err_msg
+        );
+        o_result := v_err_msg;
+END pr_pda_ship;
+/
+</code></pre>
+            </div>
 
             <p class="text-body">
-                위 예시는 실제 코드가 아니라, 출고 프로시저의 <b>전형적인 뼈대(Template)</b>를  
-                정리한 형태입니다. LOT 재고 확인 → 상태 변경 → 로그 기록 → COMMIT/ROLLBACK 까지의  
-                기본 흐름을 이해하는 데 초점을 두었습니다.
+                위 구조는 LOT 검증 → 재고 검증 → 상태 변경 → 이력 기록 → ERP 인터페이스 → 로그 기록까지  
+                PDA 출고 처리의 <b>전체 흐름을 한 번에 보여주는 템플릿</b>이야.
             </p>
 
-            <div class="section-title-sub">2) 공통 로그 패키지 활용 (예시)</div>
-            <div class="code-block"><pre><code>PACKAGE pkg_pda_log IS
+            <!-- 3-2 공통 로그 패키지 예시 -->
+            <div class="section-title-sub">2) 공통 로그 패키지(Package) 활용</div>
+            <div class="code-block">
+<pre><code>CREATE OR REPLACE PACKAGE pkg_pda_log IS
     PROCEDURE write_log (
-        p_lot_no   IN VARCHAR2,
-        p_action   IN VARCHAR2,  -- SHIP / RECEIVE / RE-RECEIVE ...
-        p_user_id  IN VARCHAR2,
-        p_message  IN VARCHAR2
+          p_lot_no   IN VARCHAR2
+        , p_action   IN VARCHAR2   -- SHIP / RECEIVE / RE-RECEIVE ...
+        , p_message  IN VARCHAR2
     );
 END pkg_pda_log;
 /
+CREATE OR REPLACE PACKAGE BODY pkg_pda_log IS
 
-PACKAGE BODY pkg_pda_log IS
     PROCEDURE write_log (
-        p_lot_no   IN VARCHAR2,
-        p_action   IN VARCHAR2,
-        p_user_id  IN VARCHAR2,
-        p_message  IN VARCHAR2
+          p_lot_no   IN VARCHAR2
+        , p_action   IN VARCHAR2
+        , p_message  IN VARCHAR2
     ) IS
     BEGIN
         INSERT INTO tb_pda_log (
-            log_dt, lot_no, action_type, user_id, message
+              log_dt, lot_no, action_type, message
         ) VALUES (
-            SYSDATE, p_lot_no, p_action, p_user_id, p_message
+              SYSDATE, p_lot_no, p_action, p_message
         );
-    END;
+    END write_log;
+
 END pkg_pda_log;
 /
-</code></pre></div>
+</code></pre>
+            </div>
 
             <p class="text-body">
                 출고/입고/재입고 프로시저에서 공통으로 사용하는 <b>로그 기록 로직</b>을  
-                <b>패키지(Package)</b>로 분리하면, 각 프로시저에서는  
-                <code>pkg_pda_log.write_log(...)</code> 한 줄만 호출해서 로그를 남길 수 있습니다.  
-                덕분에 코드 중복이 크게 줄고 유지보수가 쉬워집니다.
+                패키지(Package)로 분리하면, 각 프로시저에서는  
+                <code>pkg_pda_log.write_log(...)</code> 한 줄만 호출해서 로그를 남길 수 있어서
+                코드 중복을 크게 줄일 수 있어.
             </p>
         </section>
 
-        <!-- 3. 흐름 요약 -->
+        <!-- 4. 로직 흐름 요약 -->
         <section>
-            <h2 class="section-title">처리 흐름 요약</h2>
+            <h2 class="section-title">로직 흐름 요약</h2>
             <p class="text-body">
-                PDA 출고/입고/재입고 처리 흐름은 보통 아래 순서를 따릅니다.
+                PDA 출고/입고/재입고 프로시저는 공통적으로 아래 순서를 따른다는 걸 정리해 두었어.
             </p>
             <ul class="text-body">
-                <li>① LOT 스캔 → LOT 정보 조회</li>
-                <li>② 재고 수량 및 상태 검증</li>
-                <li>③ 출고/입고/재입고 타입에 따른 분기 처리</li>
-                <li>④ LOT 상태 및 재고 수량 변경</li>
-                <li>⑤ 로그 테이블 기록 (PDA Log)</li>
-                <li>⑥ ERP 인터페이스 테이블에 반영 (필요 시)</li>
-                <li>⑦ COMMIT 또는 예외 발생 시 ROLLBACK</li>
+                <li>① LOT 스캔 → LOT 존재 여부, 상태(STATUS) 검증</li>
+                <li>② 재고(Inventory) 수량, 위치 검증</li>
+                <li>③ 상태 변경(출고/입고/재입고) 및 수량 차감·증가</li>
+                <li>④ 이력 테이블(Hist) 기록</li>
+                <li>⑤ ERP 인터페이스 테이블 적재 (IF_FLAG = 'N')</li>
+                <li>⑥ 공통 로그 패키지 호출로 작업 결과 메시지 남기기</li>
+                <li>⑦ 예외(Exception) 발생 시 ROLLBACK + 오류 메시지 로그 기록</li>
             </ul>
-            <p class="text-body">
-                이 흐름을 기준으로 PL/SQL 코드를 읽으면,  
-                <b>PDA 화면 → DB 프로시저 → ERP 인터페이스</b>까지 전체 그림을 한 번에 그릴 수 있습니다.
-            </p>
         </section>
 
-        <!-- 4. 활용 포인트 -->
+        <!-- 5. 활용 포인트 -->
         <section>
             <h2 class="section-title">활용 포인트</h2>
             <ul class="text-body">
-                <li>IN/OUT 파라미터 구조와 OUT 메시지 활용 패턴 이해</li>
-                <li>LOT 상태 및 재고 수량을 변경하는 트랜잭션 구조 연습</li>
-                <li>공통 로그 패키지를 통한 코드 재사용·중복 제거 패턴 학습</li>
-                <li>ERP 인터페이스 테이블과 연결되는 PL/SQL 흐름 감각 익히기</li>
+                <li>PDA 스캔 기반 물류 흐름을 <b>PL/SQL(PL/SQL)</b> 구조로 설명할 수 있음</li>
+                <li>IN/OUT 파라미터와 예외 처리(Exception Handling) 패턴 연습</li>
+                <li>공통 패키지(Package)를 이용한 <b>로그 모듈화</b> 구조 이해</li>
+                <li>ERP 인터페이스 테이블과 실제 업무 테이블 간 관계를 코드에서 파악</li>
+                <li>실제 프로젝트의 LOT 흐름(출고 → 재입고)을 구조적으로 설명할 수 있는 자료로 활용 가능</li>
             </ul>
         </section>
 
-            <!-- GitHub / 뒤로가기 -->
-    <section>
-        <h2 class="section-title">GitHub 레포지토리</h2>
-        <p class="text-body">
-            실제 예제 소스 코드는 아래 GitHub 저장소에 정리되어 있습니다.
-        </p>
-        <p class="text-body">
-            <a href="https://github.com/hsk2636/hsk2636.github.io/tree/main/projects/pda-procedure-analysis"
-               class="project-link project-link-github"
-               target="_blank" rel="noopener noreferrer">
-                GitHub에서 보기
-            </a>
-        </p>
+        <!-- 6. GitHub / 메인으로 돌아가기 -->
+        <section>
+            <h2 class="section-title">GitHub 레포지토리</h2>
+            <p class="text-body">
+                실제 예제 소스 코드는 아래 GitHub 저장소에 정리할 예정이야.
+            </p>
+            <p class="text-body">
+                <a href="https://github.com/hsk2636/pda-procedure-analysis"
+                   class="project-link project-link-github"
+                   target="_blank" rel="noopener noreferrer">
+                    GitHub에서 보기
+                </a>
+            </p>
 
-        <a href="../../index.html" class="project-link">← 메인 포트폴리오로 돌아가기</a>
-    </section>
-</main>
+            <a href="../../index.html" class="back-link">← 메인 포트폴리오로 돌아가기</a>
+        </section>
 
+    </main>
 </div>
+
 </body>
 </html>
