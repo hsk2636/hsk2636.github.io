@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Data Preprocessing 실습 노트 | data-preprocessing-notes</title>
 
-    <!-- 메인 스타일 재사용 -->
-    <link rel="stylesheet" href="../../style.css?v=4">
+    <!-- 메인 포트폴리오와 동일 CSS 사용 -->
+    <link rel="stylesheet" href="../../style.css?v=5" />
 
-    <!-- 프로젝트 페이지 전용 추가 스타일 -->
+    <!-- 프로젝트 상세 페이지 전용 추가 스타일 -->
     <style>
         .project-page {
             max-width: 900px;
@@ -29,7 +29,6 @@
             color: #3730a3;
             border: 1px solid #c7d2fe;
             margin-right: 6px;
-            margin-top: 4px;
         }
 
         .code-block {
@@ -38,10 +37,10 @@
             padding: 14px 16px;
             border-radius: 10px;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-                         "Liberation Mono", "Courier New", monospace;
+                "Liberation Mono", "Courier New", monospace;
             font-size: 13px;
             overflow-x: auto;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .section-title-sub {
@@ -52,10 +51,14 @@
 
         .back-link {
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 16px;
             font-size: 13px;
             text-decoration: none;
             color: #4f46e5;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -63,142 +66,209 @@
 
 <div class="page project-page">
 
-    <!-- 상단 헤더 -->
+    <!-- ===== 상단 헤더 ===== -->
     <header class="header">
         <h1>Data Preprocessing 실습 노트</h1>
         <h3>data-preprocessing-notes</h3>
         <p>
-            Python(Pandas)을 기반으로 결측치 처리, 인코딩(Encoding),  
-            SMOTE를 이용한 불균형 데이터 처리 과정을 정리한 실습 노트입니다.
+            Python(Pandas)을 이용해 결측치 처리, 인코딩(Encoding),  
+            불균형 데이터(SMOTE)까지 정리한 <b>데이터 전처리(Data Preprocessing)</b> 실습 노트야.
         </p>
         <div style="margin-top:14px;">
             <span class="badge">Python</span>
             <span class="badge">Pandas</span>
-            <span class="badge">SMOTE</span>
             <span class="badge">Machine Learning</span>
         </div>
     </header>
 
+    <!-- ===== 본문 ===== -->
     <main class="project-container">
 
         <!-- 1. 프로젝트 개요 -->
         <section>
             <h2 class="section-title">프로젝트 개요</h2>
             <p class="text-body">
-                이 프로젝트는 데이터 분석·모델링 전에 반드시 필요한  
-                <b>데이터 전처리(Data Preprocessing)</b> 단계만 따로 모아 학습한 실습 노트입니다.  
-                단순 이론이 아니라, <b>Jupyter/Colab</b>에서 직접 실행해 볼 수 있는 코드 중심으로  
-                정리했습니다.
+                이 프로젝트는 데이터 분석/머신러닝을 하기 전에 꼭 필요한  
+                <b>데이터 전처리(Data Preprocessing)</b> 단계들을 정리한 실습 노트야.
+            </p>
+            <p class="text-body">
+                <b>결측치(Missing Values)</b>, <b>범주형 인코딩(Label/One-Hot)</b>,  
+                <b>불균형 데이터 처리(SMOTE)</b>를 Jupyter Notebook 기반으로 실습하고,  
+                각 단계에서 “왜 이렇게 하는지”까지 주석으로 설명해 두는 게 포인트야.
             </p>
         </section>
 
         <!-- 2. 파일 구성 -->
         <section>
             <h2 class="section-title">파일 구성</h2>
-            <div class="code-block"><pre><code>data-preprocessing-notes/
- ├─ 01_missing_values.ipynb    # 결측치(Missing Values) 처리 실습
- ├─ 02_encoding.ipynb          # Label / One-Hot Encoding 비교
- ├─ 03_smote_imbalanced.ipynb  # SMOTE 기반 불균형 데이터 처리
- └─ README.md                  # 프로젝트 소개 및 실행 방법</code></pre></div>
+
+            <div class="code-block">
+<pre><code>data-preprocessing-notes/
+ ├─ 01_missing_values.ipynb      -- 결측치 처리 실습 (dropna, fillna 등)
+ ├─ 02_encoding.ipynb            -- Label / One-Hot Encoding 비교
+ ├─ 03_smote_imbalance.ipynb     -- SMOTE를 이용한 불균형 데이터 처리
+ ├─ 04_pipeline_example.ipynb    -- 전처리 + 모델링 파이프라인 예제
+ └─ README.md                    -- 각 노트 설명 및 실행 방법</code></pre>
+            </div>
+
+            <p class="text-body">
+                각 <code>.ipynb</code> 파일은 Google Colab 또는 Jupyter Notebook에서 바로 열어서  
+                셀(Cell) 단위로 실행하며 공부할 수 있게 구성되어 있다고 정리해두면 좋아.
+            </p>
         </section>
 
-        <!-- 3. 핵심 노트 -->
+        <!-- 3. 핵심 코드/패턴 예시 -->
         <section>
-            <h2 class="section-title">핵심 실습 노트</h2>
+            <h2 class="section-title">핵심 코드 / 패턴 예시</h2>
 
+            <!-- 3-1 Missing Values -->
             <div class="section-title-sub">1) 결측치(Missing Values) 처리</div>
+            <div class="code-block">
+<pre><code>import pandas as pd
+
+# 예시 데이터프레임
+df = pd.DataFrame({
+    "age": [23, 25, None, 29],
+    "income": [3000, None, 4200, 3900],
+    "city": ["Seoul", "Busan", "Seoul", None]
+})
+
+# 1) 수치형 컬럼 평균으로 채우기
+df["age"] = df["age"].fillna(df["age"].mean())
+
+# 2) income 결측치는 0으로 채우기 (비즈니스 규칙에 따라)
+df["income"] = df["income"].fillna(0)
+
+# 3) city 는 'Unknown' 으로 채우기
+df["city"] = df["city"].fillna("Unknown")</code></pre>
+            </div>
+
             <p class="text-body">
-                단순히 <code>dropna()</code>로 행을 삭제하는 것뿐 아니라,  
-                평균/중앙값/최빈값 대체, 그룹별 평균 대체 등 여러 전략을 비교했습니다.
+                단순히 <code>fillna</code>만 쓰는 게 아니라,  
+                “어떤 컬럼은 평균으로”, “어떤 컬럼은 0이나 Unknown으로” 같은  
+                <b>비즈니스 규칙 기반 전처리</b>까지 고민했다는 걸 어필할 수 있어.
             </p>
-            <div class="code-block"><pre><code>import pandas as pd
 
-df = pd.read_csv("data.csv")
-
-# 1. 단순 삭제
-df_drop = df.dropna()
-
-# 2. 평균값으로 채우기
-df_mean = df.fillna(df.mean(numeric_only=True))
-
-# 3. 컬럼별로 다른 전략 적용
-df["age"]    = df["age"].fillna(df["age"].median())
-df["gender"] = df["gender"].fillna(df["gender"].mode()[0])</code></pre></div>
-
+            <!-- 3-2 Encoding -->
             <div class="section-title-sub">2) Label Encoding / One-Hot Encoding</div>
-            <p class="text-body">
-                범주형 변수(Category)를 숫자로 바꾸는 여러 방식을 실습했습니다.  
-                <b>Label Encoding</b>은 순서형 데이터에, <b>One-Hot Encoding</b>은 명목형 변수에 적합하다는 점을  
-                예제 코드와 함께 정리했습니다.
-            </p>
-            <div class="code-block"><pre><code>from sklearn.preprocessing import LabelEncoder
+            <div class="code-block">
+<pre><code>from sklearn.preprocessing import LabelEncoder
 import pandas as pd
 
 df = pd.DataFrame({
-    "color": ["red", "blue", "green", "blue"]
+    "color": ["red", "blue", "green", "blue"],
+    "size": ["S", "M", "L", "M"]
 })
 
-# 1. Label Encoding
+# 1) Label Encoding
 le = LabelEncoder()
 df["color_label"] = le.fit_transform(df["color"])
 
-# 2. One-Hot Encoding (Pandas)
-df_onehot = pd.get_dummies(df["color"], prefix="color")</code></pre></div>
+# 2) One-Hot Encoding (Pandas)
+df_onehot = pd.get_dummies(df, columns=["size"], prefix="size")
 
-            <div class="section-title-sub">3) SMOTE를 이용한 불균형 데이터 처리</div>
+print(df)
+print(df_onehot)</code></pre>
+            </div>
+
             <p class="text-body">
-                클래스 비율이 한쪽으로 치우친(Imbalanced) 데이터셋에서  
-                <b>SMOTE(Synthetic Minority Over-sampling Technique)</b>를 사용해  
-                소수 클래스 샘플을 생성하는 방법을 실습했습니다.
+                <b>Label Encoding vs One-Hot Encoding</b> 각각의 특징,  
+                “순서가 없는 범주형 변수에 Label Encoding만 쓰면 모델이 순서를 오해할 수 있다”  
+                같은 주의점을 함께 정리해 두면 훨씬 설득력 있는 포트폴리오가 돼.
             </p>
-            <div class="code-block"><pre><code>from imblearn.over_sampling import SMOTE
-from sklearn.model_selection import train_test_split
 
+            <!-- 3-3 SMOTE -->
+            <div class="section-title-sub">3) SMOTE로 불균형 데이터 처리</div>
+            <div class="code-block">
+<pre><code>from imblearn.over_sampling import SMOTE
+from collections import Counter
+import pandas as pd
+
+# X : 독립변수, y : 종속변수(레이블)
 X = df.drop("target", axis=1)
 y = df["target"]
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
-)
+print("Before:", Counter(y))
 
 smote = SMOTE(random_state=42)
-X_resampled, y_resampled = smote.fit_resample(X_train, y_train)</code></pre></div>
+X_res, y_res = smote.fit_resample(X, y)
+
+print("After :", Counter(y_res))</code></pre>
+            </div>
 
             <p class="text-body">
-                SMOTE 적용 전/후의 클래스 분포를 비교해서  
-                모델 학습에 어떤 영향을 주는지 함께 정리했습니다.
+                단순히 “SMOTE 썼다”가 아니라  
+                <b>전/후 클래스 분포(Before/After)</b>를 같이 출력해서  
+                불균형이 얼마나 완화됐는지 보여주는 게 핵심이야.
+            </p>
+
+        </section>
+
+        <!-- 4. 파이프라인 예시 -->
+        <section>
+            <h2 class="section-title">전처리 + 모델링 파이프라인 예시</h2>
+            <p class="text-body">
+                여러 전처리 단계를 <b>파이프라인(Pipeline)</b>으로 묶어서  
+                “전처리 + 모델 학습”을 한 번에 돌리는 예제도 추가할 수 있어.
+            </p>
+
+            <div class="code-block">
+<pre><code>from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+numeric_features = ["age", "income"]
+
+pipeline = Pipeline(steps=[
+    ("imputer", SimpleImputer(strategy="mean")),
+    ("scaler", StandardScaler()),
+    ("model", LogisticRegression())
+])
+
+pipeline.fit(X_train[numeric_features], y_train)
+score = pipeline.score(X_test[numeric_features], y_test)
+
+print("Test Accuracy:", score)</code></pre>
+            </div>
+
+            <p class="text-body">
+                이런 식으로 “실제 모델링까지 고려한 전처리 흐름”을 보여주면  
+                단순 실습을 넘어서 <b>실무 ML 파이프라인</b> 감각까지 어필할 수 있어.
             </p>
         </section>
 
-        <!-- 4. 활용 포인트 -->
+        <!-- 5. 활용 포인트 -->
         <section>
             <h2 class="section-title">활용 포인트</h2>
             <ul class="text-body">
-                <li>결측치 처리 전략별 장단점 체감</li>
-                <li>범주형 변수 인코딩 방식(Label vs One-Hot)에 따른 모델 성능 비교</li>
-                <li>불균형 데이터(Imbalanced Data)에서 SMOTE 적용 전/후 차이 확인</li>
-                <li>실제 모델링 전에 “전처리만 따로” 연습한 흔적을 보여주는 포트폴리오용 자료</li>
+                <li>결측치 처리, 인코딩, 불균형 데이터 대응까지 <b>전처리 전체 플로우 정리</b></li>
+                <li>각 단계별로 “왜 이렇게 선택했는지”를 한글로 코멘트 남겨 설명</li>
+                <li>Notebook 기반이라, 강의/스터디에서 바로 실행하며 설명하기 좋음</li>
+                <li>향후 모델링(분류/회귀) 실습과도 자연스럽게 연결 가능</li>
+                <li>Python(Python) + Pandas(Pandas) 활용 역량을 보여주는 포트폴리오로 사용 가능</li>
             </ul>
         </section>
 
-            <!-- GitHub / 뒤로가기 -->
-    <section>
-        <h2 class="section-title">GitHub 레포지토리</h2>
-        <p class="text-body">
-            실습에 사용한 코드와 노트북은 아래 GitHub 저장소에 정리되어 있습니다.
-        </p>
-        <p class="text-body">
-            <a href="https://github.com/hsk2636/hsk2636.github.io/tree/main/projects/data-preprocessing-notes"
-               class="project-link project-link-github"
-               target="_blank" rel="noopener noreferrer">
-                GitHub에서 보기
-            </a>
-        </p>
+        <!-- 6. GitHub / 메인으로 돌아가기 -->
+        <section>
+            <h2 class="section-title">GitHub 레포지토리</h2>
+            <p class="text-body">
+                실제 Jupyter Notebook 파일은 아래 GitHub 저장소에 정리할 예정이야.
+            </p>
+            <p class="text-body">
+                <a href="https://github.com/hsk2636/data-preprocessing-notes"
+                   class="project-link project-link-github"
+                   target="_blank" rel="noopener noreferrer">
+                    GitHub에서 보기
+                </a>
+            </p>
 
-        <a href="../../index.html" class="project-link">← 메인 포트폴리오로 돌아가기</a>
-    </section>
-</main>
+            <a href="../../index.html" class="back-link">← 메인 포트폴리오로 돌아가기</a>
+        </section>
 
+    </main>
 </div>
+
 </body>
 </html>
