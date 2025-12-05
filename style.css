@@ -13,7 +13,7 @@ body {
 
 /* 전체 레이아웃 박스 */
 .page {
-    max-width: 1100px;
+    max-width: 1100px;      /* 헤더 + 내용 공통 기준 폭 */
     margin: 0 auto 40px;
     padding: 0 16px;
     box-sizing: border-box;
@@ -22,13 +22,14 @@ body {
 /* ===== HEADER ===== */
 .header {
     background: linear-gradient(135deg, #6366f1, #ec4899);
-    background-size: 200% 200%;
+    background-size: 200% 200%;            /* 애니메이션용 */
     animation: gradientMove 10s ease infinite;
     color: #fff;
     padding: 32px 16px 28px;
     text-align: center;
     border-radius: 18px;
     box-shadow: 0 5px 16px rgba(0,0,0,0.15);
+    box-sizing: border-box;
 }
 
 @keyframes gradientMove {
@@ -44,6 +45,7 @@ body {
 }
 
 .header h3 {
+    margin: 0;
     font-weight: 400;
     opacity: 0.9;
     font-size: 13px;
@@ -51,12 +53,15 @@ body {
 
 .header p {
     margin-top: 14px;
+    max-width: 100%;
     padding: 0 8px;
+    margin-left: auto;
+    margin-right: auto;
     line-height: 1.6;
     font-size: 13px;
 }
 
-/* ===== LAYOUT ===== */
+/* ===== LAYOUT (기본: 모바일 1열) ===== */
 .container {
     display: flex;
     flex-direction: column;
@@ -72,6 +77,7 @@ body {
     border-radius: 12px;
     background: #ffffff;
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
 }
 
 /* SECTION TITLE */
@@ -83,25 +89,18 @@ body {
     padding-left: 10px;
 }
 
-/* ============================
-   PROFILE IMAGE (개선 완료!)
-   ============================ */
-
+/* PROFILE IMAGE (옛 스타일 복원) */
 .profile-pic {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
     object-fit: cover;
-    object-position: top center;     /* ★ 머리카락 절대 안 잘리게! */
-    margin-bottom: 16px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
-    border: 2px solid rgba(255,255,255,0.8);
+    object-position: center;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 리스트 공통 */
+/* LISTS / ITEMS */
 .info-box,
 .skill-box,
 .item {
@@ -111,22 +110,34 @@ body {
 .item-title {
     font-size: 15px;
     font-weight: 600;
+    margin-bottom: 3px;
 }
 
 .item-sub {
     font-size: 12px;
     opacity: 0.7;
+    margin-bottom: 5px;
 }
 
 /* CONTACT */
 .contact-line {
-    margin-bottom: 10px;
-    font-size: 13px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    margin-bottom: 10px;
+    font-size: 13px;
 }
 
 .contact-line b {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.contact-value {
+    text-align: left;
+    max-width: 100%;
+    word-break: break-all;
     font-size: 13px;
 }
 
@@ -154,6 +165,7 @@ body {
     overflow: hidden;
 }
 
+/* 퍼센트 애니메이션용: --percent 사용 */
 .bar-fill {
     height: 100%;
     background: linear-gradient(135deg, #6366f1, #ec4899);
@@ -167,7 +179,7 @@ body {
 }
 
 /* ============================
-   PROJECT CARDS
+   PROJECT CARDS & LINKS
    ============================ */
 
 .project-card {
@@ -179,15 +191,19 @@ body {
     transition: 0.2s;
 }
 
+/* 프로젝트 카드 상단 헤더 */
 .project-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
 }
 
 .project-title {
     font-size: 16px;
     font-weight: 700;
+    margin-bottom: 2px;
 }
 
 .project-tech {
@@ -195,44 +211,41 @@ body {
     opacity: 0.7;
 }
 
-/* 상세보기 / GitHub 버튼 */
+/* 옛날 상세보기 / GitHub 버튼 복원 */
 .project-links {
     display: flex;
     gap: 6px;
 }
 
-/* 상세보기 (돋보기 + hover 효과 개선) */
 .project-link {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 5px 10px;
     border-radius: 999px;
     font-size: 12px;
     font-weight: 600;
+    text-decoration: none;
     background: #eef2ff;
     color: #3730a3;
     border: 1px solid #c7d2fe;
-    text-decoration: none;
-    transition: 0.2s ease;
+    white-space: nowrap;
+    transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-.project-link:hover {
-    background: #dbe4ff;
-    color: #1e1b4b;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(99,102,241,0.28);
-}
-
-/* GitHub 버튼 */
 .project-link-github {
     background: #111827;
     color: #e5e7eb;
     border-color: #111827;
 }
 
+.project-link:hover {
+    background: #e0e7ff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(129,140,248,0.35);
+}
+
 .project-link-github:hover {
-    background: #0b1120;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(15,23,42,0.5);
+    background: #020617;
+    box-shadow: 0 4px 10px rgba(15,23,42,0.6);
 }
 
 /* 카드 hover */
@@ -243,34 +256,50 @@ body {
     transform: translateY(-3px);
 }
 
-/* TEXT BODY */
+/* SUMMARY TEXT */
 .text-body {
     line-height: 1.75;
+    font-size: 14px;
+    word-break: keep-all;
+}
+
+/* RIGHT UL */
+.right ul {
+    padding-left: 18px;
+    line-height: 1.6;
     font-size: 14px;
 }
 
 /* ============ MOBILE (600px 이하) ============ */
 @media (max-width: 600px) {
 
-    .profile-pic {
-        width: 100px;
-        height: 100px;
-        object-position: top center;
+    .page {
+        padding: 0 12px;
+    }
+
+    .header h1 {
+        font-size: 22px;
+    }
+
+    .right ul {
+        font-size: 13px;
     }
 
     .project-header {
-        flex-direction: column;
         align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .project-links {
+        margin-top: 6px;
     }
 }
 
-/* ============ TABLET (768px 이상) ============ */
+/* ============ TABLET (768px~) ============ */
 @media (min-width: 768px) {
 
-    .profile-pic {
-        width: 130px;
-        height: 130px;
-        object-position: top center; /* 더 넉넉하게 */
+    .header h1 {
+        font-size: 30px;
     }
 
     .container {
@@ -286,15 +315,15 @@ body {
     .right {
         flex: 1;
     }
-}
-
-/* ============ DESKTOP (1200px 이상) ============ */
-@media (min-width: 1200px) {
 
     .profile-pic {
-        width: 150px;
-        height: 150px;
+        width: 110px;
+        height: 110px;
     }
+}
+
+/* ============ DESKTOP (1200px~) ============ */
+@media (min-width: 1200px) {
 
     .header h1 {
         font-size: 36px;
@@ -305,29 +334,71 @@ body {
     }
 }
 
-/* 다크 모드 */
+/* ================================
+   포트폴리오 링크 버튼
+   ================================ */
+
+.portfolio-links {
+    margin-top: 18px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #eef2ff;
+    color: #3730a3;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #c7d2fe;
+    transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn-secondary:hover {
+    background: #e0e7ff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(129,140,248,0.4);
+}
+
+/* 다크 모드 (기존 스타일 그대로 유지) */
 @media (prefers-color-scheme: dark) {
 
-    body { background: #020617; color: #e5e7eb; }
+    body {
+        background: #020617;
+        color: #e5e7eb;
+    }
 
-    .left, .right, .project-card {
+    .left,
+    .right {
+        background: #020617;
+        border: 1px solid #1f2937;
+        box-shadow: 0 6px 18px rgba(15,23,42,0.8);
+    }
+
+    .project-card {
         background: #020617;
         border-color: #1f2937;
     }
 
     .project-link {
-        background: #1e1b4b;
-        color: #e0e7ff;
-        border-color: #3730a3;
+        background: #111827;
+        color: #e5e7eb;
+        border-color: #4b5563;
     }
 
     .project-link:hover {
-        background: #312e81;
+        background: #1f2937;
     }
 
     .project-link-github {
         background: #0b1120;
         color: #e5e7eb;
+        border-color: #4b5563;
     }
 
     .project-link-github:hover {
