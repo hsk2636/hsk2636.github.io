@@ -78,27 +78,37 @@
 
                     <div class="skill-box">
                         <div class="skill-name">Oracle SQL / PL-SQL</div>
-                        <div class="bar"><div class="bar-fill" style="--percent: 85%;"></div></div>
+                        <div class="bar">
+                            <div class="bar-fill" style="--percent: 85%;"></div>
+                        </div>
                     </div>
 
                     <div class="skill-box">
                         <div class="skill-name">MES / PDA / ERP</div>
-                        <div class="bar"><div class="bar-fill" style="--percent: 80%;"></div></div>
+                        <div class="bar">
+                            <div class="bar-fill" style="--percent: 80%;"></div>
+                        </div>
                     </div>
 
                     <div class="skill-box">
                         <div class="skill-name">C# (WinForms)</div>
-                        <div class="bar"><div class="bar-fill" style="--percent: 70%;"></div></div>
+                        <div class="bar">
+                            <div class="bar-fill" style="--percent: 70%;"></div>
+                        </div>
                     </div>
 
                     <div class="skill-box">
                         <div class="skill-name">Python (Pandas)</div>
-                        <div class="bar"><div class="bar-fill" style="--percent: 75%;"></div></div>
+                        <div class="bar">
+                            <div class="bar-fill" style="--percent: 75%;"></div>
+                        </div>
                     </div>
 
                     <div class="skill-box">
                         <div class="skill-name">NiFi (ETL)</div>
-                        <div class="bar"><div class="bar-fill" style="--percent: 60%;"></div></div>
+                        <div class="bar">
+                            <div class="bar-fill" style="--percent: 60%;"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -109,7 +119,9 @@
                     <div class="item">
                         <div class="item-title">Practical Data Preprocessing</div>
                         <div class="item-sub">2025</div>
-                        <div class="item-sub">Missing values, Encoding, SMOTE, Pandas 실습</div>
+                        <div class="item-sub">
+                            Missing values, Encoding, SMOTE, Pandas 실습
+                        </div>
                     </div>
 
                     <div class="item">
@@ -128,7 +140,8 @@
                     <h2 class="section-title">Profile Summary</h2>
                     <p class="text-body">
                         제조 IT(MES/PDA/ERP) 기반 환경에서 Oracle SQL 및 PL/SQL을 활용해 생산·출하·품질 데이터를 다루는 개발자.  
-                        LOT 상태 흐름, PDA 스캔 로직, ERP 연계 프로시저를 분석하며 공정·데이터 흐름을 함께 이해하는 엔지니어.
+                        LOT 상태 흐름(인수등록/작업시작/작업완료/인계등록), PDA 스캔 로직, ERP 연계 프로시저를 직접 분석하며 
+                        공정 흐름(Process Flow)과 데이터 흐름(Data Flow)을 함께 이해하는 실무형 엔지니어.
                     </p>
                 </section>
 
@@ -140,10 +153,10 @@
                         <div class="item-title">SQL Developer (Manufacturing IT)</div>
                         <div class="item-sub">2024–Present</div>
                         <ul>
-                            <li>생산지시·LOT·출고·입고 프로세스 PL/SQL 분석</li>
-                            <li>PDA 스캔 예외 처리 흐름 문서화</li>
-                            <li>품질 집계 SQL 분석(NVL, DECODE, GROUP BY)</li>
-                            <li>C# WinForms UI → DB 패키지 호출 흐름 분석</li>
+                            <li>생산지시, LOT 관리, 공정 진행, 출고·입고 프로세스 PL/SQL 분석 및 흐름 정리</li>
+                            <li>PDA 자재/출하/입고 프로시저 로직 해석 및 스캔 예외 케이스 정리</li>
+                            <li>통합 품질 정보 집계 쿼리(NVL, DECODE, GROUP BY)를 이용한 품질 데이터 집계 구조 이해</li>
+                            <li>C# WinForms 기반 생산/품질 화면 이벤트 처리 → DB 패키지 호출 흐름 문서화</li>
                         </ul>
                     </div>
 
@@ -160,14 +173,23 @@
                                 <div class="project-title">통합 품질 정보 SQL 분석</div>
                                 <div class="project-tech">Oracle SQL, PL-SQL</div>
                             </div>
-                            <div class="project-actions">
-                                <a href="projects/quality-sql-analysis/" class="btn-chip">🔍 상세 보기</a>
+                            <div class="project-links">
+                                <a href="projects/quality-sql-analysis/index.html"
+                                   class="project-link project-link-detail">
+                                    🔍 상세 보기
+                                </a>
                                 <a href="https://github.com/hsk2636/hsk2636.github.io/tree/main/projects/quality-sql-analysis"
-                                   class="btn-chip-outline" target="_blank">GitHub</a>
+                                   class="project-link project-link-github"
+                                   target="_blank" rel="noopener noreferrer">
+                                    GitHub
+                                </a>
                             </div>
                         </div>
+
                         <p class="text-body">
-                            GOOD/BAD/M2 집계 쿼리 분석 및 TOTAL ROW 계산 로직을 정리한 프로젝트.
+                            LOT별/버전별 GOOD/BAD/M2 데이터의 불량률을 계산하는 집계 쿼리 분석.  
+                            NVL 및 DECODE를 이용해 합계 행(TOTAL ROW)을 표현하는 로직을 정리하고,
+                            품질 지표 계산 흐름을 문서화한 프로젝트입니다.
                         </p>
                     </article>
 
@@ -178,14 +200,22 @@
                                 <div class="project-title">PDA 출고/입고/재입고 프로시저 분석</div>
                                 <div class="project-tech">Oracle PL-SQL, PDA(Android)</div>
                             </div>
-                            <div class="project-actions">
-                                <a href="projects/pda-procedure-analysis/" class="btn-chip">🔍 상세 보기</a>
+                            <div class="project-links">
+                                <a href="projects/pda-procedure-analysis/index.html"
+                                   class="project-link project-link-detail">
+                                    🔍 상세 보기
+                                </a>
                                 <a href="https://github.com/hsk2636/hsk2636.github.io/tree/main/projects/pda-procedure-analysis"
-                                   class="btn-chip-outline" target="_blank">GitHub</a>
+                                   class="project-link project-link-github"
+                                   target="_blank" rel="noopener noreferrer">
+                                    GitHub
+                                </a>
                             </div>
                         </div>
+
                         <p class="text-body">
-                            출고(ETC/MOV/SAL), 재입고, ERP 인터페이스 처리 흐름을 단계별로 분석한 프로젝트.
+                            현장 PDA 스캔 흐름과 DB 반영 프로시저를 분석하여  
+                            출고 유형(ETC/MOV/SAL), 재입고, ERP 인터페이스 처리 순서를 단계별로 정리한 프로젝트입니다.
                         </p>
                     </article>
 
@@ -196,30 +226,38 @@
                                 <div class="project-title">Data Preprocessing 실습 노트</div>
                                 <div class="project-tech">Python, Pandas, SMOTE</div>
                             </div>
-                            <div class="project-actions">
-                                <a href="projects/data-preprocessing-notes/" class="btn-chip">🔍 상세 보기</a>
+                            <div class="project-links">
+                                <a href="projects/data-preprocessing-notes/index.html"
+                                   class="project-link project-link-detail">
+                                    🔍 상세 보기
+                                </a>
                                 <a href="https://github.com/hsk2636/hsk2636.github.io/tree/main/projects/data-preprocessing-notes"
-                                   class="btn-chip-outline" target="_blank">GitHub</a>
+                                   class="project-link project-link-github"
+                                   target="_blank" rel="noopener noreferrer">
+                                    GitHub
+                                </a>
                             </div>
                         </div>
+
                         <p class="text-body">
-                            결측치 처리, 인코딩, SMOTE를 실습하고 정리한 프로젝트 노트.
+                            결측치 처리(fillna), Label Encoding/One-Hot Encoding,  
+                            SMOTE 기반 불균형 데이터 처리 실습을 진행하고,
+                            각 방법의 특징과 주의점을 노트로 정리한 프로젝트입니다.
                         </p>
                     </article>
 
                 </section>
 
-                <!-- 🔥 버튼 이동된 위치 — Projects 바로 아래 -->
-                <div class="portfolio-links">
-                    <a href="sql/" class="btn-secondary">🔍 Oracle SQL 포트폴리오 보기</a>
-                    <a href="plsql/" class="btn-secondary">⚙️ PL/SQL 포트폴리오 보기</a>
-                </div>
-
             </section>
-
         </main>
 
-    </div>
+        <!-- 🔗 SQL / PL-SQL 포트폴리오 바로가기 버튼 영역 -->
+        <div class="portfolio-links">
+            <a href="sql/" class="btn-secondary">🔍 Oracle SQL 포트폴리오 보기</a>
+            <a href="plsql/" class="btn-secondary">⚙️ PL/SQL 포트폴리오 보기</a>
+        </div>
+
+    </div> <!-- .page 닫힘 -->
 
 </body>
 </html>
