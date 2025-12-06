@@ -4,8 +4,8 @@ title: PL/SQL 절차형 프로그래밍 예제
 
 # PL/SQL Procedure 실전 예제 모음
 
-이 문서는 Oracle PL/SQL에서 가장 많이 사용하는 **IN/OUT 파라미터**, **예외 처리(WHEN OTHERS)**,  
-**SQLERRM 기반 오류 반환**, 그리고 **실제 업무 흐름에 가까운 LOT 작업 등록 프로시저**를 정리한 페이지입니다.
+이 문서는 Oracle PL/SQL에서 가장 많이 사용하는 **IN/OUT 파라미터**, **예외 처리(WHEN OTHERS)**, **SQLERRM 기반 오류 반환**, 
+그리고 **실제 업무 흐름에 가까운 LOT 작업 등록 프로시저**를 정리한 페이지입니다.
 
 ---
 
