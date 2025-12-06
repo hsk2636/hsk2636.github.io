@@ -6,10 +6,10 @@ title: PL/SQL 기본 구조 & 문법
 
 이 문서는 Oracle **PL/SQL(Procedural Language/SQL)** 의  
 가장 기본이 되는 블록 구조와 변수 선언, 제어문(IF, LOOP)까지  
-실무에서 꼭 필요한 최소 구성을 정리한 페이지야.
+실무에서 꼭 필요한 최소 구성을 정리한 문서입니다.
 
 특히 나중에 **입출고 프로시저, LOT 진행 프로시저** 같은 걸 이해할 때  
-`DECLARE ~ BEGIN ~ EXCEPTION ~ END` 구조를 자연스럽게 읽을 수 있도록 하는 게 목표.
+`DECLARE ~ BEGIN ~ EXCEPTION ~ END` 구조를 자연스럽게 읽을 수 있도록 하는 게 목표로 합니다.
 
 ---
 
@@ -40,25 +40,25 @@ END;
 
 - DECLARE
 
-변수/상수(Cursor, TYPE 등)를 선언하는 영역
+변수/상수(Cursor, TYPE 등)를 선언하는 영역입니다.
 
-필요 없으면 생략 가능 (바로 BEGIN ~ END부터 시작해도 됨)
+필요하지 않은 경우 생략하고 바로 BEGIN ~ END 블록부터 시작할 수도 있습니다.
 
 - BEGIN ~ END
 
-실제로 실행되는 로직(Statement)이 들어가는 메인 영역
+실제로 실행되는 로직(Statement)이 들어가는 메인 영역입니다.
 
-INSERT / UPDATE / DELETE / SELECT … INTO 등 대부분 여기서 실행
+INSERT / UPDATE / DELETE / SELECT … INTO 등 대부분의 작업이 이 영역에서 수행됩니다.
 
 - EXCEPTION
 
-오류(예외)가 났을 때 처리하는 영역
+오류(예외)가 났을 때 처리하는 영역입니다.
 
-실무 프로시저에서 로그 테이블에 오류 저장, 메시지 리턴 이런 부분이 자주 위치
+실무 프로시저에서는 이 영역에서 로그 테이블에 오류를 저장하거나, 오류 메시지 값을 OUT 파라미터로 반환하는 경우가 많습니다.
 
 - 마지막 /
 
-SQL*Plus, SQL Developer 에서 PL/SQL 블록 실행을 의미하는 구분자
+SQL*Plus, SQL Developer 에서 PL/SQL 블록 실행을 의미하는 구분자입니다.
 
 ---
 
@@ -108,7 +108,7 @@ END;
 
 ## 3-2. 설명
 
-- IF ~ ELSIF ~ ELSE ~ END IF; 구조
+- IF ~ ELSIF ~ ELSE ~ END IF; 구조를 사용합니다.
 
 - 실무에서
 
@@ -122,7 +122,7 @@ END;
 
 # 4. LOOP / WHILE / FOR 문
 
-PL/SQL에서는 반복문을 크게 3가지로 많이 써:
+PL/SQL에서는 반복문을 주로 아래 세 가지 형태로 사용합니다.
 
 - 기본 LOOP ~ EXIT WHEN ~ END LOOP
 
@@ -168,9 +168,9 @@ END;
 
 ## 4-3. 실무에서 LOOP가 쓰이는 곳
 
-- 특정 조건을 만족하는 레코드를 커서(Cursor)로 하나씩 읽으면서 처리
+- 특정 조건을 만족하는 레코드를 커서(Cursor)로 하나씩 읽으면서 처리할 때
 
-- 임시 테이블의 데이터를 순차적으로 스캔
+- 임시 테이블의 데이터를 순차적으로 스캔할 때
 
 - 생산지시 상세를 한 건씩 돌면서 PDA 쪽 테이블에 INSERT 하는 로직 등
 
@@ -181,8 +181,8 @@ END;
 
 # 5. 간단한 “작업 시작 로그” PL/SQL 블록 예시
 
-이제 지금까지 본 DECLARE / BEGIN / IF / DATE 를 합쳐서
-“LOT 작업 시작 로그를 남기고, 상태를 출력하는 블록” 느낌으로 하나 만들어보자.
+이제 지금까지 본 DECLARE / BEGIN / IF / DATE 요소를 이용하여
+“LOT 작업 시작 로그를 남기고, 상태를 출력하는 블록” 예제입니다.
 
 ```sql
 DECLARE
@@ -216,23 +216,19 @@ END;
 
 ## 5-1. 실무 연계 상상
 
-- 실제 프로시저에서는 INSERT INTO TB_JOB_START_LOG ... 같은 구문이 들어가고
+- 실제 프로시저에서는 INSERT INTO TB_JOB_START_LOG ... 같은 구문이 들어가고 LOT 번호, 수량, 사용자 ID, 작업 시작 시간 등을 기록합니다.
 
-- LOT 번호, 수량, 사용자 ID, 작업 시작 시간 등을 기록
-
-- 예외 발생 시, ERROR_LOG 테이블에 INSERT 하거나, OUT 파라미터로 v_err_msg 같은 걸 반환
-
-이 문서는 “PL/SQL 블록을 읽을 수 있는 눈”을 만드는 단계라고 보면 돼.
+- 예외 발생 시, ERROR_LOG 테이블에 INSERT 하거나, OUT 파라미터로 v_err_msg와 같은 오류 메시지를 반환하는 방식으로 확장할 수 있습니다.
 
 ---
 
 # 6. 요약
 
-- PL/SQL은 기본적으로 DECLARE → BEGIN → EXCEPTION → END; 구조로 이해하면 편함
+- PL/SQL은 기본적으로 DECLARE → BEGIN → EXCEPTION → END; 구조로 이해하면 편리합니다.
 
-- 변수/상수 선언, IF 분기, LOOP 반복문은 나중에 프로시저(Procedure), 패키지(Package) 를 읽을 때 계속 반복적으로 등장
+- 변수/상수 선언, IF 분기, LOOP 반복문은 나중에 프로시저(Procedure), 패키지(Package) 를 읽을 때 반복적으로 등장하는 핵심 요소입니다.
 
-- 지금 단계에서는
+- 다음 세 가지에 익숙해지는 것을 목표로 합니다.
 
   - 블록 구조
 
@@ -240,24 +236,4 @@ END;
 
   - IF / LOOP 문법
  
-이 3가지만 익숙해져도 큰 흐름 잡는 데 충분함
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+이 내용을 기반으로, 이후 PL/SQL 프로시저 및 패키지 구조를 보다 수월하게 이해할 수 있습니다.
