@@ -5,14 +5,14 @@ title: PL/SQL Package 구조 분석
 # PL/SQL Package 구조 분석
 
 이 문서는 Oracle PL/SQL에서 가장 강력한 구성 요소 중 하나인  
-**PACKAGE (명세서 SPEC + 구현 BODY)** 구조를 이해하기 쉽게 정리한 문서입니다.
+**PACKAGE (명세서 SPEC + 구현 BODY)** 구조를 이해하기 쉽게 정리한 페이지입니다.
 
 Package는 실무에서 다음 이유로 매우 중요합니다:
 
-- 여러 Procedure/Function을 한 모듈로 묶어 관리
-- SPEC과 BODY 분리 덕분에 유지보수·API 관리가 쉬움
-- MES/PDA/ERP 같은 여러 시스템에서 공통 API로 사용 가능
-- 공통 상수/타입/함수(Private) 제공 → 개발 품질 향상
+- 여러 Procedure / Function을 하나의 모듈로 묶어 관리할 수 있습니다.
+- SPEC과 BODY 분리 덕분에 유지보수 및 API 관리가 용이합니다.
+- MES/PDA/ERP 등 여러 시스템에서 공통 API로 활용할 수 있습니다.
+- 공통 상수, 타입, Private 함수 등을 제공하여 개발 품질을 향상시킬 수 있습니다.
 
 ---
 
@@ -61,25 +61,27 @@ END PKG_LOT_PROCESS;
 
 ## 1-2. 설명
 
-- SPEC 영역은 API 명세서
+- SPEC 영역 = API 명세서 역할
 
-  - 어떤 프로시저/함수를 외부에서 사용할 수 있는지 정의
+    - 어떤 Procedure / Function을 외부에서 사용할 수 있는지 정의합니다.
 
-  - 내부 구현은 전혀 없음
+    - 내부 구현 내용은 포함하지 않습니다.
 
 - 상수(Constant) 정의
 
-  - 성공/실패 코드 등 시스템 전체에서 동일 규칙 적용 가능
+    - 성공/실패 코드 등 시스템 전체에 공통으로 적용되는 규칙을 정의할 수 있습니다.
 
 - 사용자 정의 타입(Type)
 
-  - 여러 컬럼을 묶어서 반환해야 할 때 유용
+    - 여러 컬럼을 하나의 RECORD 타입으로 묶어 반환해야 할 때 유용합니다.
 
-  - ERP/MES 통합 보고서에서 자주 활용
+    - ERP/MES 통합 보고서, 공정 정보 전달 등에서 활용될 수 있습니다.
 
 - PUBLIC PROCEDURE 목록
 
-  - 외부(C#, Python, MES/PDA 등)에서 호출 가능한 API만 여기에 선언
+    - SPEC에 선언된 Procedure / Function만 외부(C#, Python, MES/PDA 등)에서 호출 가능합니다.
+
+    - 외부에 제공할 API 목록을 SPEC이 문서처럼 보여주는 역할을 합니다.
  
 ---
 
@@ -162,25 +164,25 @@ END PKG_LOT_PROCESS;
 
 ## 2-2. 설명
 
-- FN_CHECK_LOT_EXISTS → Private Function
+- FN_CHECK_LOT_EXISTS (Private Function)
 
-  - SPEC에 없음 → 외부 호출 불가
+    - SPEC에 선언되어 있지 않으므로 외부에서 직접 호출할 수 없습니다.
 
-  - BODY 내부에서만 사용하는 검증용 함수
+    - PACKAGE 내부에서만 사용하는 검증용 함수입니다.
 
-- START_LOT / FINISH_LOT → Public Procedure
+- START_LOT, FINISH_LOT (Public Procedure)
 
-  - SPEC에 선언되어 있으므로 외부에서 직접 호출 가능
+    - SPEC에 선언되어 있으므로 외부에서 호출할 수 있습니다.
 
-  - MES/PDA/ERP 시스템도 호출할 수 있는 대표 API
+    - MES/PDA/ERP 시스템에서 LOT 시작/완료 처리 시 공통 API로 사용할 수 있습니다.
 
 - 예외 처리(WHEN OTHERS)
 
-  - 에러 발생 시 O_RESULT에 실패 코드 입력
+    - 오류 발생 시 O_RESULT에 공통 실패 코드(C_FAIL)를 설정하는 방식으로 결과 코드 규칙을 일관되게 유지할 수 있습니다.
 
 - 공통 상수 사용
 
-  - C_SUCCESS / C_FAIL 로 결과 상태 일원화
+    - C_SUCCESS, C_FAIL과 같은 상수를 사용하면 결과 상태를 시스템 전반에서 일관성 있게 관리할 수 있습니다.
  
 ---
 
@@ -198,33 +200,26 @@ END PKG_LOT_PROCESS;
 ---
 
 # 4. 실무에서 Package를 사용하는 이유
-✔ 1) 유지보수 쉬움
+1) 유지보수 용이성
+    - SPEC이 바뀌지 않는 한, BODY 내부 로직을 변경해도 외부 프로그램(C#, MES, PDA 등)은 수정 없이 그대로 사용할 수 있습니다.
 
-SPEC은 바뀌지 않고 BODY만 바뀌면 외부 시스템은 영향 없이 로직만 개선 가능.
+2) 공통 모듈화
+    - 여러 프로그램이 동일한 Package API를 호출함으로써 중복 코드를 줄이고, 규칙을 일관되게 적용할 수 있습니다.
 
-✔ 2) 공통 모듈화
+3) Private Function을 통한 안정성 향상
+    - 외부에서 호출하면 안 되는 로직은 BODY 내부 Private 함수로 감춰 잘못된 사용을 방지할 수 있습니다.
 
-여러 프로그램이 같은 패키지 API를 호출하여 중복 코드 없이 통일된 규칙 적용 가능.
-
-✔ 3) PRIVATE 함수로 안정성 ↑
-
-외부에서 호출하면 안 되는 로직을 숨길 수 있음.
-
-✔ 4) SPEC = API 문서 역할
-
-C#, Python, MES/PDA 시스템 개발자에게 “이 패키지에서 제공하는 기능 목록”을 전달할 수 있음.
+4) SPEC = API 문서 역할
+    - SPEC 파일 자체가 “이 패키지가 제공하는 기능 목록”이 되므로, 타 시스템 개발자(C#, Python, 웹 등)에게 API 문서처럼 제공할 수 있습니다.
 
 ---
 
 ✔ 요약
 
-- PACKAGE SPEC = 공개 API 정의
+- PACKAGE SPEC은 공개 API(Procedure, Function)를 정의하는 영역입니다.
 
-- PACKAGE BODY = 실제 구현
+- PACKAGE BODY는 실제 구현 로직을 담고 있으며, Private Function을 통해 내부 로직을 캡슐화할 수 있습니다.
 
-- Private Function 으로 내부 기능 캡슐화
+- 공통 상수와 타입을 Package로 관리하면, 시스템 전반의 규칙을 일관되게 유지할 수 있습니다.
 
-- 공통 상수/타입 관리에 유리
-
-- MES/PDA/ERP 같은 제조 IT에서는
-  “LOT 시작/완료 / 출고 / 입고 / ERP 연계” 같은 기능 단위로 Package 설계하면 유지보수 최적화됨
+- MES/PDA/ERP 등 제조 IT 환경에서는 “LOT 시작/완료, 출고, 입고, ERP 연계”와 같은 기능 단위로 Package를 설계하면 유지보수성과 확장성이 크게 향상됩니다.
