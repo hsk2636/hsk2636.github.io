@@ -72,7 +72,7 @@
         <h3>pda-procedure-analysis</h3>
         <p>
             현장 PDA 스캔으로 실행되는 출고·입고·재입고 프로시저(Procedure)를 분석해서  
-            LOT 상태 변경 흐름과 ERP 인터페이스 구조를 정리한 PL/SQL 포트폴리오야.
+            LOT 상태 변경 흐름과 ERP 인터페이스 구조를 정리한 PL/SQL 포트폴리오입니다.
         </p>
         <div style="margin-top:14px;">
             <span class="badge">Oracle PL/SQL</span>
@@ -89,13 +89,13 @@
             <h2 class="section-title">프로젝트 개요</h2>
             <p class="text-body">
                 이 프로젝트는 제조 현장에서 사용하는 PDA 출고·입고·재입고 기능을 담당하는 
-                <b>PL/SQL 프로시저 세트</b>를 분석한 내용이야.  
+                <b>PL/SQL 프로시저 세트</b>를 분석한 내용입니다.  
                 LOT 스캔 → 재고/상태 검증 → 이력 기록(Log) → ERP 인터페이스까지 이어지는
-                전체 흐름을 코드 관점에서 정리했어.
+                전체 흐름을 코드 관점에서 정리했습니다.
             </p>
             <p class="text-body">
                 특히 출고 유형 <b>ETC / MOV / SAL</b> 구분, 재입고(재고 되돌리기) 처리,  
-                공통 로그 패키지(Package)를 이용한 <b>로그 기록 일원화</b>가 주요 포인트야.
+                공통 로그 패키지(Package)를 이용한 <b>로그 기록 일원화</b>가 주요 포인트입니다.
             </p>
         </section>
 
@@ -115,7 +115,7 @@
 
             <p class="text-body">
                 각 <code>*.sql</code> 파일은 <b>실행 가능한 PL/SQL 스크립트</b> 형식으로 만들어두고,  
-                <code>README.md</code>에 실행 순서와 필요한 테스트 데이터 조건을 정리하는 방식이야.
+                <code>README.md</code>에 실행 순서와 필요한 테스트 데이터 조건을 정리하는 방식입니다.
             </p>
         </section>
 
@@ -197,7 +197,7 @@ END pr_pda_ship;
 
             <p class="text-body">
                 위 구조는 LOT 검증 → 재고 검증 → 상태 변경 → 이력 기록 → ERP 인터페이스 → 로그 기록까지  
-                PDA 출고 처리의 <b>전체 흐름을 한 번에 보여주는 템플릿</b>이야.
+                PDA 출고 처리의 <b>전체 흐름을 한 번에 보여주는 템플릿</b>입니다.
             </p>
 
             <!-- 3-2 공통 로그 패키지 예시 -->
@@ -235,7 +235,7 @@ END pkg_pda_log;
                 출고/입고/재입고 프로시저에서 공통으로 사용하는 <b>로그 기록 로직</b>을  
                 패키지(Package)로 분리하면, 각 프로시저에서는  
                 <code>pkg_pda_log.write_log(...)</code> 한 줄만 호출해서 로그를 남길 수 있어서
-                코드 중복을 크게 줄일 수 있어.
+                코드 중복을 크게 줄일 수 있습니다.
             </p>
         </section>
 
@@ -243,7 +243,7 @@ END pkg_pda_log;
         <section>
             <h2 class="section-title">로직 흐름 요약</h2>
             <p class="text-body">
-                PDA 출고/입고/재입고 프로시저는 공통적으로 아래 순서를 따른다는 걸 정리해 두었어.
+                PDA 출고/입고/재입고 프로시저는 공통적으로 아래 순서를 따른다는 걸 정리하였습니다다.
             </p>
             <ul class="text-body">
                 <li>① LOT 스캔 → LOT 존재 여부, 상태(STATUS) 검증</li>
